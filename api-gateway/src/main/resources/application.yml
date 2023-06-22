@@ -1,0 +1,50 @@
+server:
+  port: 8054
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origins: "*"
+            allowed-methods: "*"
+            allowed-headers: "*"
+      routes:
+        - id: candidate
+          uri: lb://candidate-service
+          predicates:
+            - Path=/GestionCandidat/**
+        - id: participant
+          uri: lb://participation-service
+          predicates:
+            - Path=/participant/**
+        - id : auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/v1/**
+        - id: evaluation-service
+          uri: lb://evaluation-service
+          predicates:
+            - Path=/evaluation/**
+        - id: node-service
+          uri: lb://node-service
+          predicates:
+            - Path=/api/**
+        - id: employee-service
+          uri: lb://employee-service
+          predicates:
+            - Path=/employees/**
+        - id: offre-service
+          uri: lb://offre-service
+          predicates:
+            - Path=/offres/**
+
+eureka:
+  instance:
+    appname: ${spring.application.name}
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
