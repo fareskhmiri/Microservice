@@ -33,10 +33,10 @@ app.listen(PORT, () => {
   console.log("messages-service on 3000");
 });
 
-app.get("/api/users", (req, res) => {
-  res.json("I am user-service");
+app.get("/api/messages", (req, res) => {
+  res.json("I am messages-service");
 });
 
 app.use("/api/messages", articleRouter);
 
-eurekaHelper.registerWithEureka("user-service", PORT);
+eurekaHelper.registerWithEureka("messages-service", PORT);

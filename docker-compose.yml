@@ -2,7 +2,7 @@ version: "3.9"
 services:
   # Candidate:
   #   container_name: candidat-service
-  #   build: /Users/badrbenfraj/IdeaProjects/Microservice/candidat-service
+  #   build: ./candidat-service
   #   ports:
   #     - "8045:8045"
   #   hostname: candidate
@@ -14,7 +14,7 @@ services:
 
   Participation:
     container_name: participation_service
-    build: /Users/badrbenfraj/IdeaProjects/Microservice/participation_service
+    build: ./participation_service
     ports:
       - "8084:8084"
     hostname: Participation
@@ -26,7 +26,7 @@ services:
 
   Employee:
     container_name: employee-service
-    build: /Users/badrbenfraj/IdeaProjects/Microservice/employee-service
+    build: ./employee-service
     ports:
       - "8087:8087"
     hostname: employee
@@ -38,7 +38,7 @@ services:
 
   # Evaluation:
   #   container_name: evaluation-service
-  #   build: /Users/badrbenfraj/IdeaProjects/Microservice/evalulation-service
+  #   build: ./evalulation-service
   #   ports:
   #     - "8085:8085"
   #   hostname: evaluation
@@ -50,7 +50,7 @@ services:
 
   # Offre:
   #   container_name: offre-service
-  #   build: /Users/badrbenfraj/IdeaProjects/Microservice/offre-service
+  #   build: ./offre-service
   #   ports:
   #     - "8086:8086"
   #   hostname: offre
@@ -62,7 +62,7 @@ services:
 
   Auth:
     container_name: auth-service
-    build: /Users/badrbenfraj/IdeaProjects/Microservice/auth-service
+    build: ./auth-service
     ports:
       - "8081:8081"
     hostname: authentification
@@ -74,7 +74,7 @@ services:
 
   Gateway:
     container_name: api-gateway
-    build: /Users/badrbenfraj/IdeaProjects/Microservice/api-gateway
+    build: ./api-gateway
     ports:
       - "8054:8054"
     hostname: api-gateway
@@ -85,7 +85,7 @@ services:
       - Eureka
 
   messages:
-    build: /Users/badrbenfraj/IdeaProjects/Microservice/GestionMessage
+    build: ./GestionMessage
     container_name: messages
     image: messages
     ports:
@@ -97,7 +97,7 @@ services:
 
   Eureka:
     container_name: eureka-server
-    build: /Users/badrbenfraj/IdeaProjects/Microservice/eureka-server
+    build: ./eureka-server
     ports:
       - "8761:8761"
     hostname: eureka-server
