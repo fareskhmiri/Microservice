@@ -1,3 +1,4 @@
 
 node-service/index.js
 node_modules/
+.angular/
