@@ -1,0 +1,158 @@
+<app-screen
+  [loaderShow]="loading$|async"
+  [showHeader]="true"
+  class="container-fluid pl-screen e2e-screen-edit"
+>
+  <ng-template #headerTitle *ngIf="data$ | async">
+    <h1 i18n="@@UID__title;departement;add-department">Ajouter departement</h1>
+  </ng-template>
+  <ng-template #headerActions> </ng-template>
+
+  <ng-template #bodyScreen *ngIf="data$ | async">
+    <form [formGroup]="form">
+      <div class="card content-form e2e-content-form">
+        <div class="row">
+          <div
+            class="col-12 col-sm-12 col-md-6 col-lg-4 col-row-0 col-col-0 col-height-1 nom-department p-0 pr-xs-0 pr-sm-0 pr-md-4 pr-lg-4 mt-lg-0"
+          >
+            <div
+              [ngClass]="{'input-field vp-inputtext': true, 'filled': data?.nomDepartment}"
+            >
+              <div class="vp-inputtext-wraper">
+                <input
+                  class="e2e-text-field input"
+                  type="text"
+                  pInputText
+                  id="nomdepartment"
+                  [readonly]=""
+                  formControlName="nomDepartment"
+                  [required]="false"
+                />
+                <label
+                  i18n="@@UID__fld_nomDepartment;departement;add-department"
+                  for="nomdepartment"
+                >
+                  Nom Department
+                </label>
+              </div>
+
+              <app-validator
+                [control]="form?.get('nomDepartment')"
+              ></app-validator>
+            </div>
+          </div>
+
+          <div
+            class="col-12 col-sm-12 col-md-6 col-lg-4 col-row-0 col-col-4 col-height-1 nombre-emplyoye p-0 pr-xs-0 pr-sm-0 pr-md-0 pr-lg-4 mt-lg-0"
+          >
+            <div
+              [ngClass]="{'input-field vp-inputtext': true, 'filled': data?.nombreEmplyoye}"
+            >
+              <div class="vp-inputtext-wraper">
+                <input
+                  class="e2e-text-field input"
+                  type="text"
+                  pInputText
+                  id="nombreemplyoye"
+                  [readonly]=""
+                  formControlName="nombreEmplyoye"
+                  [required]="false"
+                />
+                <label
+                  i18n="@@UID__fld_nombreEmplyoye;departement;add-department"
+                  for="nombreemplyoye"
+                >
+                  Nombre Emplyoye
+                </label>
+              </div>
+
+              <app-validator
+                [control]="form?.get('nombreEmplyoye')"
+              ></app-validator>
+            </div>
+          </div>
+
+          <div
+            class="col-12 col-sm-12 col-md-6 col-lg-4 col-row-0 col-col-8 col-height-1 categorie p-0 pr-xs-0 pr-sm-0 pr-md-4 pr-lg-0 mt-lg-0"
+          >
+            <div
+              [ngClass]="{'input-field vp-inputtext': true, 'filled': data?.Categorie}"
+            >
+              <div class="vp-inputtext-wraper">
+                <input
+                  class="e2e-text-field input"
+                  type="text"
+                  pInputText
+                  id="categorie"
+                  [readonly]=""
+                  formControlName="Categorie"
+                  [required]="false"
+                />
+                <label
+                  i18n="@@UID__fld_categorie;departement;add-department"
+                  for="categorie"
+                >
+                  Categorie
+                </label>
+              </div>
+
+              <app-validator [control]="form?.get('Categorie')"></app-validator>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div
+            class="col-12 col-sm-12 col-md-6 col-lg-4 col-row-1 col-col-0 col-height-1 description p-0 pr-xs-0 pr-sm-0 pr-md-4 pr-lg-4"
+          >
+            <div class="input-field textarea-field plm-textarea e2e-textarea">
+              <textarea
+                [cols]="30"
+                pInputTextarea
+                plmTextArea
+                [autoResize]="true"
+                id="description"
+                [readonly]=""
+                formControlName="description"
+                [required]="false"
+                [rows]="3"
+                [class.empty]="data?.description == '' || data?.description == null"
+              ></textarea>
+              <label
+                i18n="@@UID__fld_description;departement;add-department"
+                for="description"
+              >
+                description
+              </label>
+
+              <app-validator
+                [control]="form?.get('description')"
+              ></app-validator>
+            </div>
+          </div>
+
+          <div
+            class="col-12 col-sm-12 col-md-6 col-lg-8 col-row-1 col-col-4 col-height-1 p-0 pr-xs-0 pr-sm-0 pr-md-0 pr-lg-0"
+          ></div>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+  <ng-template #bodyScreen *ngIf="!(loading$|async) && !(data$ | async)">
+    <div i18n="message;msgNoDataFound">No data to display</div>
+  </ng-template>
+  <ng-template #footerActions>
+    <p-button
+      class="plm-button e2e-button style-save left"
+      i18n-label="@@UID__act_button-42178;departement;add-department"
+      label="Ajouter"
+      [disabled]="!this.isFormValid()"
+      (onClick)="doButton42178()"
+    >
+    </p-button>
+  </ng-template>
+</app-screen>
+<!-- to display screens with navigation type 'dialog'-->
+<router-outlet name="dialog"></router-outlet>
+
+<!-- to display screens with navigation type 'call'-->
+<router-outlet #callOutlet="outlet" name="call"></router-outlet>

@@ -66,7 +66,34 @@ export class MainBaseComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   styleClass
   // palmyra-needle-add-menu-entry: Do not delete this line
-  menu = []
+  menu = [
+    {
+      label: $localize`:menu;conge:Conge`,
+      icon: 'fa fa-umbrella-beach',
+      id: 'conge',
+      link: ['/conge/listconge'],
+      command: (event) => this.openPage(event.item),
+    },
+    {
+      label: $localize`:menu;messages:Messages`,
+      icon: 'fa fa-mail-bulk',
+      id: 'messages',
+      link: ['/message/messagelist'],
+      command: (event) => this.openPage(event.item),
+    },
+    {
+      label: $localize`:menu;departement:Departement`,
+      id: 'departement',
+      link: ['/departement/search-1'],
+      command: (event) => this.openPage(event.item),
+    },
+    {
+      label: $localize`:menu;liste-des-employer:Liste des employer`,
+      id: 'liste-des-employer',
+      link: ['/employee/search-1'],
+      command: (event) => this.openPage(event.item),
+    },
+  ]
 
   // end palmyra-needle-add-menu-entry
   /**

@@ -23,6 +23,20 @@ const routes: Routes = [
       },
 
       {
+        path: 'employee',
+        loadChildren: () =>
+          import('./employee/employee.module').then((m) => m.EmployeeModule),
+      },
+
+      {
+        path: 'departement',
+        loadChildren: () =>
+          import('./departement/departement.module').then(
+            (m) => m.DepartementModule
+          ),
+      },
+
+      {
         path: 'conge',
         loadChildren: () =>
           import('./conge/conge.module').then((m) => m.CongeModule),

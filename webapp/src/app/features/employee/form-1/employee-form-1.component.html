@@ -1,0 +1,202 @@
+<app-screen
+  [loaderShow]="loading$|async"
+  [showHeader]="true"
+  class="container-fluid pl-screen e2e-screen-edit"
+>
+  <ng-template #headerTitle *ngIf="data$ | async">
+    <h1 i18n="@@UID__title;employee;form-1">Ajouter Employer</h1>
+  </ng-template>
+  <ng-template #headerActions> </ng-template>
+
+  <ng-template #bodyScreen *ngIf="data$ | async">
+    <form [formGroup]="form">
+      <div class="card content-form e2e-content-form">
+        <div class="row">
+          <div
+            class="col-12 col-sm-12 col-md-6 col-lg-4 col-row-0 col-col-0 col-height-1 first-name p-0 pr-xs-0 pr-sm-0 pr-md-4 pr-lg-4 mt-lg-0"
+          >
+            <div
+              [ngClass]="{'input-field vp-inputtext': true, 'filled': data?.firstName}"
+            >
+              <div class="vp-inputtext-wraper">
+                <input
+                  class="e2e-text-field input"
+                  type="text"
+                  pInputText
+                  id="firstname"
+                  [readonly]=""
+                  formControlName="firstName"
+                  [required]="false"
+                />
+                <label
+                  i18n="@@UID__fld_firstName;employee;form-1"
+                  for="firstname"
+                >
+                  Nom
+                </label>
+              </div>
+
+              <app-validator [control]="form?.get('firstName')"></app-validator>
+            </div>
+          </div>
+
+          <div
+            class="col-12 col-sm-12 col-md-6 col-lg-4 col-row-0 col-col-4 col-height-1 last-name p-0 pr-xs-0 pr-sm-0 pr-md-0 pr-lg-4 mt-lg-0"
+          >
+            <div
+              [ngClass]="{'input-field vp-inputtext': true, 'filled': data?.lastName}"
+            >
+              <div class="vp-inputtext-wraper">
+                <input
+                  class="e2e-text-field input"
+                  type="text"
+                  pInputText
+                  id="lastname"
+                  [readonly]=""
+                  formControlName="lastName"
+                  [required]="false"
+                />
+                <label
+                  i18n="@@UID__fld_lastName;employee;form-1"
+                  for="lastname"
+                >
+                  Prénom
+                </label>
+              </div>
+
+              <app-validator [control]="form?.get('lastName')"></app-validator>
+            </div>
+          </div>
+
+          <div
+            class="col-12 col-sm-12 col-md-6 col-lg-4 col-row-0 col-col-8 col-height-1 email p-0 pr-xs-0 pr-sm-0 pr-md-4 pr-lg-0 mt-lg-0"
+          >
+            <div
+              [ngClass]="{'input-field vp-inputtext': true, 'filled': data?.email}"
+            >
+              <div class="vp-inputtext-wraper">
+                <input
+                  class="e2e-text-field input"
+                  type="text"
+                  pInputText
+                  id="email"
+                  [readonly]=""
+                  formControlName="email"
+                  [required]="false"
+                />
+                <label i18n="@@UID__fld_email;employee;form-1" for="email">
+                  Email
+                </label>
+              </div>
+
+              <app-validator [control]="form?.get('email')"></app-validator>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div
+            class="col-12 col-sm-12 col-md-6 col-lg-4 col-row-1 col-col-0 col-height-1 profession p-0 pr-xs-0 pr-sm-0 pr-md-4 pr-lg-4"
+          >
+            <div
+              [ngClass]="{'input-field vp-inputtext': true, 'filled': data?.profession}"
+            >
+              <div class="vp-inputtext-wraper">
+                <input
+                  class="e2e-text-field input"
+                  type="text"
+                  pInputText
+                  id="profession"
+                  [readonly]=""
+                  formControlName="profession"
+                  [required]="false"
+                />
+                <label
+                  i18n="@@UID__fld_profession;employee;form-1"
+                  for="profession"
+                >
+                  Profission
+                </label>
+              </div>
+
+              <app-validator
+                [control]="form?.get('profession')"
+              ></app-validator>
+            </div>
+          </div>
+
+          <div
+            class="col-12 col-sm-12 col-md-6 col-lg-4 col-row-1 col-col-4 col-height-1 salary p-0 pr-xs-0 pr-sm-0 pr-md-0 pr-lg-4"
+          >
+            <div
+              [ngClass]="{'input-field vp-inputtext': true, 'filled': data?.salary}"
+            >
+              <div class="vp-inputtext-wraper">
+                <input
+                  class="e2e-text-field input"
+                  type="text"
+                  pInputText
+                  id="salary"
+                  [readonly]=""
+                  formControlName="salary"
+                  [required]="false"
+                />
+                <label i18n="@@UID__fld_salary;employee;form-1" for="salary">
+                  Salaire
+                </label>
+              </div>
+
+              <app-validator [control]="form?.get('salary')"></app-validator>
+            </div>
+          </div>
+
+          <div
+            class="col-12 col-sm-12 col-md-6 col-lg-4 col-row-1 col-col-8 col-height-1 departement p-0 pr-xs-0 pr-sm-0 pr-md-4 pr-lg-0"
+          >
+            <div
+              [ngClass]="{'input-field vp-inputtext': true, 'filled': data?.departement}"
+            >
+              <div class="vp-inputtext-wraper">
+                <input
+                  class="e2e-text-field input"
+                  type="text"
+                  pInputText
+                  id="departement"
+                  [readonly]=""
+                  formControlName="departement"
+                  [required]="false"
+                />
+                <label
+                  i18n="@@UID__fld_departement;employee;form-1"
+                  for="departement"
+                >
+                  Departement
+                </label>
+              </div>
+
+              <app-validator
+                [control]="form?.get('departement')"
+              ></app-validator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+  <ng-template #bodyScreen *ngIf="!(loading$|async) && !(data$ | async)">
+    <div i18n="message;msgNoDataFound">No data to display</div>
+  </ng-template>
+  <ng-template #footerActions>
+    <p-button
+      class="plm-button e2e-button left"
+      i18n-label="@@UID__act_button-54477;employee;form-1"
+      label="Ajouter"
+      (onClick)="doButton54477()"
+    >
+    </p-button>
+  </ng-template>
+</app-screen>
+<!-- to display screens with navigation type 'dialog'-->
+<router-outlet name="dialog"></router-outlet>
+
+<!-- to display screens with navigation type 'call'-->
+<router-outlet #callOutlet="outlet" name="call"></router-outlet>

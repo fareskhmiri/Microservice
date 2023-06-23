@@ -1,0 +1,186 @@
+<app-screen
+  [showHeader]="true"
+  leftResponsiveConfig="col-xs-4 col-sm-4 col-md-4 col-lg-4 pl-0"
+  rightResponsiveConfig="col-8 col-sm-8 col-md-8 col-lg-8 pr-0 pl-0"
+  [loaderShow]="loading$|async"
+  styleName="container-fluid pl-screen pl-screen-sr e2e-search "
+>
+  <ng-template #headerTitle>
+    <h1 i18n="@@UID__title;departement;search-1">search-1</h1>
+  </ng-template>
+  <ng-template #headerActions> </ng-template>
+  <ng-template #bodyScreen>
+    <div class="card" style="position: relative">
+      <div class="grid-actions">
+        <p-button
+          class="plm-button e2e-button style-createwithinsearchinput left"
+          i18n-label="@@UID__act_button-63307;departement;search-1"
+          label="Ajouter Departement"
+          (onClick)="doButton63307()"
+        >
+        </p-button>
+      </div>
+      <p-paginator
+        #paginator
+        *ngIf="(count$ | async) > (pageSize$ | async)"
+        [rows]="pageSize$ | async"
+        [totalRecords]="(count$ | async)"
+        pageLinkSize="3"
+        [templateRight]="status"
+        [templateLeft]="colsSelection"
+        (onPageChange)="paginate($event)"
+      >
+      </p-paginator>
+      <ng-template #status let-state>
+        <div class="paginator-right-display e2e-paginator-right-display">
+          <span i18n="message;labelPage">Page</span>&nbsp;{{currentPage$ |
+          async}} / {{getNumberOfPage((count$ | async), (pageSize$ |
+          async))}}&nbsp;({{count$ | async}})&nbsp;<span
+            i18n="message;labelItems"
+            >items</span
+          >
+        </div>
+      </ng-template>
+      <ng-template #colsSelection> </ng-template>
+
+      <p-table
+        [value]="value$ | async"
+        [loading]="loading"
+        [responsive]="true"
+        [resizableColumns]="true"
+        columnResizeMode="fit"
+        [(selection)]="selectedItems"
+        selectionMode="single"
+        [autoLayout]="true"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th
+              pResizableColumn
+              hideColumn="nomDepartment"
+              class="plm-left ui-l"
+            >
+              <span
+                i18n="@@UID__fld_nomDepartment;departement;search-1"
+                [pTooltip]="columnHeaderi18n?.nomDepartment"
+                [escape]="false"
+                tooltipPosition="top"
+                >Nom Department</span
+              >
+            </th>
+            <th
+              pResizableColumn
+              hideColumn="nombreEmplyoye"
+              class="plm-left ui-l"
+            >
+              <span
+                i18n="@@UID__fld_nombreEmplyoye;departement;search-1"
+                [pTooltip]="columnHeaderi18n?.nombreEmplyoye"
+                [escape]="false"
+                tooltipPosition="top"
+                >Nombre Emplyoye</span
+              >
+            </th>
+            <th pResizableColumn hideColumn="Categorie" class="plm-left ui-l">
+              <span
+                i18n="@@UID__fld_categorie;departement;search-1"
+                [pTooltip]="columnHeaderi18n?.categorie"
+                [escape]="false"
+                tooltipPosition="top"
+                >Categorie</span
+              >
+            </th>
+            <th pResizableColumn hideColumn="description" class="plm-left ui-l">
+              <span
+                i18n="@@UID__fld_description;departement;search-1"
+                [pTooltip]="columnHeaderi18n?.description"
+                [escape]="false"
+                tooltipPosition="top"
+                >Description</span
+              >
+            </th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+          <tr [pContextMenuRow]="rowData" [pSelectableRow]="rowData">
+            <td
+              plmTruncatedCell
+              (mouseOverCell)="addTooltip($event)"
+              [tooltipDisabled]="disableTooltip"
+              [pTooltip]="rowData?.nomDepartment"
+              class="plm-left e2e-table ui-l"
+              hideColumn="nomDepartment"
+            >
+              <span class="ui-column-title e2e-ui-column-title"></span>
+              {{rowData?.nomDepartment}}
+            </td>
+
+            <td
+              plmTruncatedCell
+              (mouseOverCell)="addTooltip($event)"
+              [tooltipDisabled]="disableTooltip"
+              [pTooltip]="rowData?.nombreEmplyoye"
+              class="plm-left e2e-table ui-l"
+              hideColumn="nombreEmplyoye"
+            >
+              <span class="ui-column-title e2e-ui-column-title"></span>
+              {{rowData?.nombreEmplyoye}}
+            </td>
+
+            <td
+              plmTruncatedCell
+              (mouseOverCell)="addTooltip($event)"
+              [tooltipDisabled]="disableTooltip"
+              [pTooltip]="rowData?.Categorie"
+              class="plm-left e2e-table ui-l"
+              hideColumn="Categorie"
+            >
+              <span class="ui-column-title e2e-ui-column-title"></span>
+              {{rowData?.Categorie}}
+            </td>
+
+            <td
+              plmTruncatedCell
+              (mouseOverCell)="addTooltip($event)"
+              [tooltipDisabled]="disableTooltip"
+              [pTooltip]="rowData?.description"
+              class="plm-left e2e-table ui-l"
+              hideColumn="description"
+            >
+              <span class="ui-column-title e2e-ui-column-title"></span>
+              {{rowData?.description}}
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td [attr.colspan]="5" class="text-align-ui-l e2e-text-align">
+              <div
+                i18n="message;msgNoResultsFound"
+                *ngIf="!(loading$ | async) && (value$ | async)?.length === 0"
+              >
+                No results were found
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </ng-template>
+  <ng-template #outlets>
+    <!-- to display screens with navigation type 'dialog'-->
+    <router-outlet name="dialog"></router-outlet>
+
+    <!-- to display screens with navigation type 'call'-->
+    <router-outlet #callOutlet="outlet" name="call"></router-outlet>
+    <!-- to display confirmation message-->
+    <p-confirmDialog
+      class="plm-confirm-dialog e2e-confirm-dialog"
+      modal="modal"
+      key="departementsearch1"
+    >
+    </p-confirmDialog>
+  </ng-template>
+</app-screen>
