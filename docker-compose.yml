@@ -1,110 +1,109 @@
 version: "3.0"
 services:
-    # Candidate:
-    #   container_name: candidat-service
-    #   build: ./candidat-service
-    #   ports:
-    #     - "8045:8045"
-    #   hostname: candidate
-    #   environment:
-    #     - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-    #   image: "candidate-service" 
-    #   depends_on: 
-    #     - Eureka
+  # Candidate:
+  #   container_name: candidat-service
+  #   build: ./candidat-service
+  #   ports:
+  #     - "8045:8045"
+  #   hostname: candidate
+  #   environment:
+  #     - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+  #   image: "candidate-service"
+  #   depends_on:
+  #     - Eureka
 
+  Participation:
+    container_name: participation_service
+    build: ./participation_service
+    ports:
+      - "8084:8084"
+    hostname: Participation
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    image: "participation_service"
+    depends_on:
+      - Eureka
 
-    Participation:
-      container_name: participation_service
-      build: ./participation_service
-      ports:
-        - "8084:8084"
-      hostname: Participation
-      environment:
-        - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-      image: "participation_service"
-      depends_on:
-        - Eureka
+  Employee:
+    container_name: employee-service
+    build: ./employee-service
+    ports:
+      - "8087:8087"
+    hostname: employee
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    image: "employee-service"
+    depends_on:
+      - Eureka
 
-    Employee:
-      container_name: employee-service
-      build: ./employee-service
-      ports:
-        - "8087:8087"
-      hostname: employee
-      environment:
-        - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-      image: "employee-service"
-      depends_on:
-        - Eureka
+  # Evaluation:
+  #   container_name: evaluation-service
+  #   build: ./evalulation-service
+  #   ports:
+  #     - "8085:8085"
+  #   hostname: evaluation
+  #   environment:
+  #     - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+  #   image: "evaluation-service"
+  #   depends_on:
+  #     - Eureka
 
-    # Evaluation:
-    #   container_name: evaluation-service
-    #   build: ./evalulation-service
-    #   ports:
-    #     - "8085:8085"
-    #   hostname: evaluation
-    #   environment:
-    #     - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-    #   image: "evaluation-service"
-    #   depends_on:
-    #     - Eureka
+  # Offre:
+  #   container_name: offre-service
+  #   build: ./offre-service
+  #   ports:
+  #     - "8086:8086"
+  #   hostname: offre
+  #   environment:
+  #     - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+  #   image: "offre-service"
+  #   depends_on:
+  #     - Eureka
 
-    # Offre:
-    #   container_name: offre-service
-    #   build: ./offre-service
-    #   ports:
-    #     - "8086:8086"
-    #   hostname: offre
-    #   environment:
-    #     - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-    #   image: "offre-service"
-    #   depends_on:
-    #     - Eureka
+  Auth:
+    container_name: auth-service
+    build: ./auth-service
+    ports:
+      - "8081:8081"
+    hostname: authentification
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    image: "auth-service"
+    depends_on:
+      - Eureka
 
-    Auth:
-      container_name: auth-service
-      build: ./auth-service
-      ports:
-        - "8081:8081"
-      hostname: authentification
-      environment:
-        - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-      image: "auth-service"
-      depends_on:
-        - Eureka
+  Gateway:
+    container_name: api-gateway
+    build: ./api-gateway
+    ports:
+      - "8054:8054"
+    hostname: api-gateway
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    image: "api-gateway"
+    depends_on:
+      - Eureka
 
-    Gateway:
-      container_name: api-gateway
-      build: ./api-gateway
-      ports:
-        - "8054:8054"
-      hostname: api-gateway
-      environment:
-        - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-      image: "api-gateway"
-      depends_on:
-        - Eureka
+  messages:
+    build: /Users/badrbenfraj/IdeaProjects/Microservice/GestionMessage
+    #  network_mode: host
+    container_name: users
+    image: users
+    ports:
+      - "3000:3000"
+    networks:
+      - eureka-server
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=eurekaserver
+    depends_on:
+      - "Eureka"
 
-    # node:
-    #     container_name: node-service
-    #     image: "node-service"
-    #     build: ./node-service
-    #     ports:
-    #       - "3000:5000"
-    #     hostname: node-service
-    #     environment:
-    #       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=eureka-server
-    #     depends_on:
-    #       - "Eureka"
-
-
-    #     command: "node ./index.js"
-    Eureka:
-      container_name: eureka-server
-      build: ./eureka-server
-      ports:
-        - "8761:8761"
-      hostname: eureka-server
-      image: "eureka-server"
-      environment:   
-        - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+  Eureka:
+    container_name: eureka-server
+    build: ./eureka-server
+    ports:
+      - "8761:8761"
+    hostname: eureka-server
+    image: "eureka-server"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
