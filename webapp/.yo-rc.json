@@ -1,0 +1,29 @@
+{
+  "@palmyra/generator-palmyra-frontend": {
+    "currentDir": "/opt/shared/palmyra/bbenfraj/1213015/microservice-frontend",
+    "configDir": "/opt/shared/palmyra/bbenfraj/1213015/microservice-frontend",
+    "outputDir": "/opt/shared/palmyra/bbenfraj/1213015/microservice-frontend/webapp/",
+    "appContext": {
+      "appName": "microservice",
+      "appVersion": "1.0.0",
+      "library": "@palmyra/angular-palmyra-library@14.4.0",
+      "theme": "@palmyra/angular-prestige-theme@4.18.0",
+      "templates": "@palmyra/angular-palmyra-templates@14.4.0",
+      "generator": "@palmyra/generator-palmyra-frontend@5.30.0",
+      "skipInstall": false,
+      "no-api": false,
+      "formatFiles": true,
+      "defaultTemplates": "@palmyra/angular-palmyra-templates@14.4.0"
+    },
+    "no-api": false,
+    "swaggerMode": false,
+    "override-files": {
+      "override-files": {
+        "force": false,
+        "files": "",
+        "categories": ""
+      }
+    },
+    "lastGeneration": 1687541248002
+  }
+}

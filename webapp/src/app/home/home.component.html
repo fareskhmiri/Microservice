@@ -1,0 +1,54 @@
+<app-header>
+  <ng-template plmTemplate="leftHeader">
+    <button
+      i18n="message;skipToMainContent"
+      class="skip-main"
+      (keyup.enter)="focus(main)"
+    >
+      Skip to main content
+    </button>
+    <button
+      i18n="message;skipToMenu"
+      class="skip-main"
+      (keyup.enter)="focus(mainmenu)"
+    >
+      Skip to menu
+    </button>
+    <div class="menu-button-container">
+      <button class="menu-button" (click)="toggleMenu()">
+        <i class="pi pi-bars"></i>
+        <span class="menu-label">Menu</span>
+      </button>
+    </div>
+  </ng-template>
+
+  <ng-template plmTemplate="centerHeader">
+    <vp-logo></vp-logo>
+  </ng-template>
+
+  <ng-template plmTemplate="rightHeader">
+    <app-languages class="plm-languages"></app-languages>
+    <app-user-info
+      (logoutEvt)="logout()"
+      (keyup.enter)="keyboardEnter($event)"
+    ></app-user-info>
+  </ng-template>
+</app-header>
+<div #mainmenu>
+  <palmyra-menu
+    [expanded]="menuExpanded"
+    [menu]="menu"
+    (changeMenu)="menuExpanded = $event"
+    (keyup.enter)="keyboardEnter($event)"
+  ></palmyra-menu>
+</div>
+<app-body [ngClass]="{ fluidBody: menuExpanded }" class="">
+  <app-message></app-message>
+  <div #main>
+    <h1 class="pl-main-title" [ngClass]="styleClass">{{screenTitle}}</h1>
+    <div class="plm-maincontent" tabindex="0">
+      <router-outlet class="feature"></router-outlet>
+    </div>
+  </div>
+</app-body>
+<app-footer> </app-footer>

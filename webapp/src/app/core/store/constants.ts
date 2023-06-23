@@ -1,0 +1,17 @@
+export const INIT = 'Init';
+export const INIT_STATE = 'Init State';
+export const DESTROY = 'Destroy';
+export const SHARE_WIDGET_DATA ='Share Widget Data';
+export const CTX = 'ctx';
+export const PARENT_CTX = 'parentCtx';
+export const VALUE = 'value';
+export const PARENT = 'parent';
+export const PATH = 'path';
+export const CRITERIA = 'criteria';
+export const TOTAL_ITEMS = 'totalItems';
+export const SIZE = 'size';
+export const PAGE = 'page';
+export const VARS = 'vars';
+export const ROWS_SELECTED = 'rowsSelected';
+export const LOADING = 'loading';
+export const UPDATED_BY_CHILDREN = 'updatedByChildren';

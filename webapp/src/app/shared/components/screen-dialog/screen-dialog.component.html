@@ -1,0 +1,5 @@
+<p-dialog modal="true" [blockScroll]="true" [(visible)]="displayDialog" [closable]="true" (onHide)="cancel()" tabindex="0">
+  <p-header></p-header>
+  <router-outlet></router-outlet>
+  <p-footer></p-footer>
+</p-dialog>

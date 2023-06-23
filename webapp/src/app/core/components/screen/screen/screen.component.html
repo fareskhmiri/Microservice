@@ -1,0 +1,19 @@
+<div [class]="styleName">
+  <app-loader-mask [show]="loaderShow"></app-loader-mask>
+  <app-header-screen *ngIf="showHeader" [headerTitle]="headerTitle" [actionsTemplate]="headerActions"> </app-header-screen>
+  <div class="app-body-screen" >
+    <div *ngIf="displayNavigationRight">
+      <div class="row">
+        <div [class]="leftResponsiveConfig" [ngClass]="['mt-0']">
+      <ng-container *ngTemplateOutlet="leftBodyScreen"></ng-container>
+      </div>
+      <div [class]="rightResponsiveConfig" [ngClass]="['mt-0']">
+      <ng-container *ngTemplateOutlet="rightOutlets"></ng-container>
+      </div>
+      </div>
+      </div>
+  <ng-container *ngTemplateOutlet="bodyScreen"></ng-container>
+  </div>
+  <app-footer-screen *ngIf="footerActions && showFooter" [actionsTemplate]="footerActions" [actionsLeft]="footerActionsLeft"> </app-footer-screen>
+  </div>
+  <ng-container *ngTemplateOutlet="outlets"></ng-container>

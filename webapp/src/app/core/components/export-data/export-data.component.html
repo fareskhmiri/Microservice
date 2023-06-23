@@ -1,0 +1,39 @@
+<div (keydown.esc)="retrieveFormats($event,op)">
+  <p-button
+    class="plm-button e2e-button"
+    [icon]="icon"
+    [disabled]="disabled"
+    [label]="label"
+    (click)="retrieveFormats($event,op)"
+  ></p-button>
+  <p-overlayPanel #op styleClass="plm-export-component">
+    <div>
+      <p-panel header="Options" [toggleable]="true">
+        <div class="option">
+          <label i18n="message;exportedKeysLabel">Exported Keys:</label>
+          <p-selectButton
+            [options]="keysOptions"
+            [(ngModel)]="keys"
+          ></p-selectButton>
+        </div>
+        <div class="option">
+          <label i18n="message;exportedItemsLabel">Exported Items:</label>
+          <p-selectButton
+            [options]="dataToExportOptions"
+            [(ngModel)]="dataToExport"
+          ></p-selectButton>
+        </div>
+      </p-panel>
+    </div>
+    <div *ngFor="let format of availableFormats">
+      <div
+        ngClass="item {{format | lowercase}}"
+        (click)="exportData(format)"
+        (keyup.enter)="exportData(format)"
+        tabindex="0"
+      >
+        {{format}}
+      </div>
+    </div>
+  </p-overlayPanel>
+</div>

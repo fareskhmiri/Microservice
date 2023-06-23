@@ -1,0 +1,195 @@
+<app-screen
+  [showHeader]="true"
+  leftResponsiveConfig="col-xs-4 col-sm-4 col-md-4 col-lg-4 pl-0"
+  rightResponsiveConfig="col-8 col-sm-8 col-md-8 col-lg-8 pr-0 pl-0"
+  [loaderShow]="loading$|async"
+  styleName="container-fluid pl-screen pl-screen-sr e2e-search "
+>
+  <ng-template #headerTitle>
+    <h1 i18n="@@UID__title;message;messagelist">Messages</h1>
+  </ng-template>
+  <ng-template #headerActions> </ng-template>
+  <ng-template #bodyScreen>
+    <div class="card" style="position: relative">
+      <div class="grid-actions">
+        <p-button
+          class="plm-button e2e-button style-createwithinsearchinput left"
+          i18n-label="@@UID__act_button-03772;message;messagelist"
+          label="Add New Message"
+          (onClick)="doButton03772()"
+        >
+        </p-button>
+      </div>
+      <p-paginator
+        #paginator
+        *ngIf="(count$ | async) > (pageSize$ | async)"
+        [rows]="pageSize$ | async"
+        [totalRecords]="(count$ | async)"
+        pageLinkSize="3"
+        [templateRight]="status"
+        [templateLeft]="colsSelection"
+        (onPageChange)="paginate($event)"
+      >
+      </p-paginator>
+      <ng-template #status let-state>
+        <div class="paginator-right-display e2e-paginator-right-display">
+          <span i18n="message;labelPage">Page</span>&nbsp;{{currentPage$ |
+          async}} / {{getNumberOfPage((count$ | async), (pageSize$ |
+          async))}}&nbsp;({{count$ | async}})&nbsp;<span
+            i18n="message;labelItems"
+            >items</span
+          >
+        </div>
+      </ng-template>
+      <ng-template #colsSelection> </ng-template>
+
+      <p-table
+        [value]="value$ | async"
+        [loading]="loading"
+        [responsive]="true"
+        [resizableColumns]="true"
+        columnResizeMode="fit"
+        [(selection)]="selectedItems"
+        selectionMode="single"
+        [autoLayout]="true"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th pResizableColumn hideColumn="message" class="plm-left ui-l">
+              <span
+                i18n="@@UID__fld_message;message;messagelist"
+                [pTooltip]="columnHeaderi18n?.message"
+                [escape]="false"
+                tooltipPosition="top"
+                >Message</span
+              >
+            </th>
+            <th pResizableColumn hideColumn="sender" class="plm-left ui-l">
+              <span
+                i18n="@@UID__fld_sender;message;messagelist"
+                [pTooltip]="columnHeaderi18n?.sender"
+                [escape]="false"
+                tooltipPosition="top"
+                >Sender</span
+              >
+            </th>
+            <th pResizableColumn hideColumn="recipient" class="plm-left ui-l">
+              <span
+                i18n="@@UID__fld_recipient;message;messagelist"
+                [pTooltip]="columnHeaderi18n?.recipient"
+                [escape]="false"
+                tooltipPosition="top"
+                >Recipient</span
+              >
+            </th>
+            <th pResizableColumn hideColumn="Column87801" class="plm-left ui-l">
+              <span
+                i18n="@@UID__fld_column87801;message;messagelist"
+                [pTooltip]="columnHeaderi18n?.column87801"
+                [escape]="false"
+                tooltipPosition="top"
+                >Column4</span
+              >
+            </th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+          <tr [pContextMenuRow]="rowData" [pSelectableRow]="rowData">
+            <td
+              plmTruncatedCell
+              (mouseOverCell)="addTooltip($event)"
+              [tooltipDisabled]="disableTooltip"
+              [pTooltip]="rowData?.message"
+              class="plm-left e2e-table ui-l"
+              hideColumn="message"
+            >
+              <span class="ui-column-title e2e-ui-column-title"></span>
+              {{rowData?.message}}
+            </td>
+
+            <td
+              plmTruncatedCell
+              (mouseOverCell)="addTooltip($event)"
+              [tooltipDisabled]="disableTooltip"
+              [pTooltip]="rowData?.sender"
+              class="plm-left e2e-table ui-l"
+              hideColumn="sender"
+            >
+              <span class="ui-column-title e2e-ui-column-title"></span>
+              {{rowData?.sender}}
+            </td>
+
+            <td
+              plmTruncatedCell
+              (mouseOverCell)="addTooltip($event)"
+              [tooltipDisabled]="disableTooltip"
+              [pTooltip]="rowData?.recipient"
+              class="plm-left e2e-table ui-l"
+              hideColumn="recipient"
+            >
+              <span class="ui-column-title e2e-ui-column-title"></span>
+              {{rowData?.recipient}}
+            </td>
+            <td
+              class="vp-col-column-87801 plm-left plm-container e2e-container"
+            >
+              <div class="vp-container-body">
+                <p-button
+                  class="plm-button e2e-inline-button"
+                  i18n-label="@@UID__fld_button91271;message;messagelist"
+                  icon="fa fa-pencil-alt"
+                  iconPos="left"
+                  label="Edit"
+                  [disabled]=""
+                  *ngIf="rowData && !rowData.isGrp "
+                  (onClick)="doButton91271(rowData)"
+                >
+                </p-button>
+
+                <p-button
+                  class="plm-button e2e-inline-button"
+                  i18n-label="@@UID__fld_button01644;message;messagelist"
+                  icon="pi pi-eye"
+                  iconPos="left"
+                  label="View"
+                  [disabled]=""
+                  *ngIf="rowData && !rowData.isGrp "
+                  (onClick)="doButton01644(rowData)"
+                >
+                </p-button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td [attr.colspan]="5" class="text-align-ui-l e2e-text-align">
+              <div
+                i18n="message;msgNoResultsFound"
+                *ngIf="!(loading$ | async) && (value$ | async)?.length === 0"
+              >
+                No results were found
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </ng-template>
+  <ng-template #outlets>
+    <!-- to display screens with navigation type 'dialog'-->
+    <router-outlet name="dialog"></router-outlet>
+
+    <!-- to display screens with navigation type 'call'-->
+    <router-outlet #callOutlet="outlet" name="call"></router-outlet>
+    <!-- to display confirmation message-->
+    <p-confirmDialog
+      class="plm-confirm-dialog e2e-confirm-dialog"
+      modal="modal"
+      key="messagemessagelist"
+    >
+    </p-confirmDialog>
+  </ng-template>
+</app-screen>

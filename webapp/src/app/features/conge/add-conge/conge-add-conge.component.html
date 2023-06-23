@@ -1,0 +1,111 @@
+<app-screen
+  [loaderShow]="loading$|async"
+  [showHeader]="true"
+  class="container-fluid pl-screen e2e-screen-edit"
+>
+  <ng-template #headerTitle *ngIf="data$ | async">
+    <h1 i18n="@@UID__title;conge;add-conge">Ajout Congé</h1>
+  </ng-template>
+  <ng-template #headerActions> </ng-template>
+
+  <ng-template #bodyScreen *ngIf="data$ | async">
+    <form [formGroup]="form">
+      <div class="card content-form e2e-content-form">
+        <div class="row">
+          <div
+            class="col-12 col-sm-12 col-md-6 col-lg-6 col-row-0 col-col-0 col-height-1 date-87740 p-0 pr-xs-0 pr-sm-0 pr-md-4 pr-lg-4 mt-lg-0"
+          >
+            <div
+              [style]="{'width':'100%'}"
+              class="input-field date-field e2e-date-field"
+            >
+              <p-calendar
+                [showButtonBar]="true"
+                [showIcon]="true"
+                [focusTrap]="true"
+                appendTo="body"
+                id="date87740"
+                #wcagdate87740
+                (onClose)="setDateFocus(wcagdate87740,'button')"
+                (onShow)="setDateFocus(wcagdate87740, 'button', false)"
+                [disabled]=""
+                formControlName="Date87740"
+                [required]="false"
+              >
+              </p-calendar>
+              <label
+                i18n="@@UID__fld_date87740;conge;add-conge"
+                for="date87740"
+              >
+                Date Depart
+              </label>
+
+              <app-validator [control]="form?.get('Date87740')"></app-validator>
+            </div>
+          </div>
+
+          <div
+            class="col-12 col-sm-12 col-md-6 col-lg-6 col-row-0 col-col-6 col-height-1 date-87740092080 p-0 pr-xs-0 pr-sm-0 pr-md-0 pr-lg-0 mt-lg-0"
+          >
+            <div
+              [style]="{'width':'100%'}"
+              class="input-field date-field e2e-date-field"
+            >
+              <p-calendar
+                [showButtonBar]="true"
+                [showIcon]="true"
+                [focusTrap]="true"
+                appendTo="body"
+                id="date87740092080"
+                #wcagdate87740092080
+                (onClose)="setDateFocus(wcagdate87740092080,'button')"
+                (onShow)="setDateFocus(wcagdate87740092080, 'button', false)"
+                [disabled]=""
+                formControlName="Date87740092080"
+                [required]="false"
+              >
+              </p-calendar>
+              <label
+                i18n="@@UID__fld_date87740092080;conge;add-conge"
+                for="date87740092080"
+              >
+                Date Fin
+              </label>
+
+              <app-validator
+                [control]="form?.get('Date87740092080')"
+              ></app-validator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+  <ng-template #bodyScreen *ngIf="!(loading$|async) && !(data$ | async)">
+    <div i18n="message;msgNoDataFound">No data to display</div>
+  </ng-template>
+  <ng-template #footerActions>
+    <p-button
+      class="plm-button e2e-button style-save left"
+      i18n-label="@@UID__act_button-35872039101;conge;add-conge"
+      label="Update"
+      [disabled]="!this.isFormValid()"
+      (onClick)="doButton35872039101()"
+    >
+    </p-button>
+
+    <p-button
+      class="plm-button e2e-button style-save left"
+      i18n-label="@@UID__act_button-35872;conge;add-conge"
+      label="Save"
+      [disabled]="!this.isFormValid()"
+      (onClick)="doButton35872()"
+    >
+    </p-button>
+  </ng-template>
+</app-screen>
+<!-- to display screens with navigation type 'dialog'-->
+<router-outlet name="dialog"></router-outlet>
+
+<!-- to display screens with navigation type 'call'-->
+<router-outlet #callOutlet="outlet" name="call"></router-outlet>

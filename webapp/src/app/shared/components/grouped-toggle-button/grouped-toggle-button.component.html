@@ -1,0 +1,35 @@
+<ng-template ngFor let-field [ngForOf]="listData  | keyvalue">
+  <div class="vp-grouped-togglebutton-items">
+    <h3 *ngIf="field?.key !== 'undefined'">{{ field?.key }}</h3>
+    <p-selectButton [options]="field.value" [(ngModel)]="value" (onChange)="onSelect($event)" [style]="style"
+      [class]="class" [disabled]="disabled" >
+      <ng-template let-item>
+        <div (click)="showConfirmationMessage(item)"  style="width: 100%;">
+        <div class="mono-selection vp-select-card" *ngIf="displayMode === 'card'">
+          <i class="pi pi-check-circle"></i>
+          <i class="pi pi-circle-off"></i>
+          <div class="vp-select-card-content {{horizontalAlignment}}">
+            <img *ngIf="imgField" [src]="getPropretyImage(item)" class="vp-select-card-img">
+            <i *ngIf="!imgField && defaultIcon" class="vp-select-card-icon {{defaultIcon}}"></i>
+            <p class="vp-select-card-label">
+              {{ getPropretyLabel(item) }}
+            </p>
+          </div>
+          <div class="vp-select-card-description">
+            <p>{{getPropretyDescription(item) }}</p>
+          </div>
+        </div>
+        <div class="vp-select-card" *ngIf="displayMode === 'classic'">
+          <div class="vp-select-card-content">
+            <i *ngIf="defaultIcon" class="vp-select-card-icon {{defaultIcon}}"></i>
+            <p class="vp-select-card-label"> {{ getPropretyLabel(item) }}</p>
+            <div class="vp-select-card-description">
+              <p>{{getPropretyDescription(item) }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      </ng-template>
+    </p-selectButton>
+  </div>
+</ng-template>

@@ -1,0 +1,136 @@
+<app-screen
+  [loaderShow]="loading$|async"
+  [showHeader]="true"
+  class="container-fluid pl-screen e2e-screen-edit"
+>
+  <ng-template #headerTitle *ngIf="data$ | async">
+    <h1 i18n="@@UID__title;message;form-1">Message</h1>
+  </ng-template>
+  <ng-template #headerActions> </ng-template>
+
+  <ng-template #bodyScreen *ngIf="data$ | async">
+    <form [formGroup]="form">
+      <div class="card content-form e2e-content-form">
+        <div class="row">
+          <div
+            class="col-12 col-sm-12 col-md-6 col-lg-6 col-row-0 col-col-0 col-height-1 message p-0 pr-xs-0 pr-sm-0 pr-md-4 pr-lg-4 mt-lg-0"
+          >
+            <div class="input-field textarea-field plm-textarea e2e-textarea">
+              <textarea
+                [cols]="30"
+                pInputTextarea
+                plmTextArea
+                [autoResize]="true"
+                id="message"
+                [readonly]=""
+                formControlName="message"
+                [required]="true"
+                [rows]="5"
+                [class.empty]="data?.message == '' || data?.message == null"
+              ></textarea>
+              <label i18n="@@UID__fld_message;message;form-1" for="message">
+                Message
+              </label>
+
+              <app-validator [control]="form?.get('message')"></app-validator>
+            </div>
+          </div>
+
+          <div
+            class="col-12 col-sm-12 col-md-6 col-lg-6 col-row-0 col-col-6 col-height-1 p-0 pr-xs-0 pr-sm-0 pr-md-0 pr-lg-0 mt-lg-0"
+          ></div>
+        </div>
+        <div class="row">
+          <div
+            class="col-12 col-sm-12 col-md-6 col-lg-6 col-row-1 col-col-0 col-height-1 sender p-0 pr-xs-0 pr-sm-0 pr-md-4 pr-lg-4"
+          >
+            <div
+              [ngClass]="{'input-field vp-inputtext': true, 'filled': data?.sender}"
+            >
+              <div class="vp-inputtext-wraper">
+                <input
+                  class="e2e-text-field input"
+                  type="text"
+                  pInputText
+                  id="sender"
+                  [readonly]=""
+                  formControlName="sender"
+                  [required]="true"
+                />
+                <label i18n="@@UID__fld_sender;message;form-1" for="sender">
+                  Sender
+                </label>
+              </div>
+
+              <app-validator [control]="form?.get('sender')"></app-validator>
+            </div>
+          </div>
+
+          <div
+            class="col-12 col-sm-12 col-md-6 col-lg-6 col-row-1 col-col-6 col-height-1 p-0 pr-xs-0 pr-sm-0 pr-md-0 pr-lg-0"
+          ></div>
+        </div>
+        <div class="row">
+          <div
+            class="col-12 col-sm-12 col-md-6 col-lg-6 col-row-2 col-col-0 col-height-1 recepient p-0 pr-xs-0 pr-sm-0 pr-md-4 pr-lg-4"
+          >
+            <div
+              [ngClass]="{'input-field vp-inputtext': true, 'filled': data?.recepient}"
+            >
+              <div class="vp-inputtext-wraper">
+                <input
+                  class="e2e-text-field input"
+                  type="text"
+                  pInputText
+                  id="recepient"
+                  [readonly]=""
+                  formControlName="recepient"
+                  [required]="true"
+                />
+                <label
+                  i18n="@@UID__fld_recepient;message;form-1"
+                  for="recepient"
+                >
+                  Recepient
+                </label>
+              </div>
+
+              <app-validator [control]="form?.get('recepient')"></app-validator>
+            </div>
+          </div>
+
+          <div
+            class="col-12 col-sm-12 col-md-6 col-lg-6 col-row-2 col-col-6 col-height-1 p-0 pr-xs-0 pr-sm-0 pr-md-0 pr-lg-0"
+          ></div>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+  <ng-template #bodyScreen *ngIf="!(loading$|async) && !(data$ | async)">
+    <div i18n="message;msgNoDataFound">No data to display</div>
+  </ng-template>
+  <ng-template #footerActions>
+    <p-button
+      class="plm-button e2e-button style-save left"
+      i18n-label="@@UID__act_send-058028;message;form-1"
+      label="Update"
+      [disabled]="!this.isFormValid()"
+      (onClick)="doSend058028()"
+    >
+    </p-button>
+
+    <p-button
+      class="plm-button e2e-button style-save left"
+      i18n-label="@@UID__act_send;message;form-1"
+      label="Send"
+      [disabled]="!this.isFormValid()"
+      (onClick)="doSend()"
+    >
+    </p-button>
+  </ng-template>
+</app-screen>
+<!-- to display screens with navigation type 'dialog'-->
+<router-outlet name="dialog"></router-outlet>
+
+<!-- to display screens with navigation type 'call'-->
+<router-outlet #callOutlet="outlet" name="call"></router-outlet>

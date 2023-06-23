@@ -1,0 +1,36 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "downlevelIteration": true,
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "module": "es2020",
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "target": "es2020",
+    "lib": ["es2018", "dom"],
+    "skipLibCheck": true,
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@env/*": ["src/environments/*"],
+      "@core/*": ["src/app/core/*"],
+      "@shared/*": ["src/app/shared/*"],
+      "@auth/*": ["src/app/auth/*"],
+      "@models/*": ["src/app/core/models/*"],
+      "@services-api/*": ["src/app/core/services-api/*"],
+      "@features/*": ["src/app/features/*"],
+      "@services/*": ["src/app/core/services/*"],
+      "@angular/*": ["./node_modules/@angular/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true
+  }
+}

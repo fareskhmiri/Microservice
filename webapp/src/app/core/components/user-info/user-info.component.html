@@ -1,0 +1,21 @@
+<button
+  #btn
+  type="button"
+  class="btn-user-info"
+  icon="pi pi-user"
+  pButton
+  label="{{ name }}"
+  (click)="menu.toggle($event)"
+></button>
+<p-slideMenu #menu class="user-info" [model]="items" [popup]="true">
+</p-slideMenu>
+<p-dialog
+  header="Change Password"
+  i18n-header="message;changePassword"
+  modal="true"
+  [(visible)]="showChangePasswd"
+  (onHide)="hideChangePasswd()"
+  class="plm-change-password-dialog"
+>
+  <app-change-password (hideDialog)="hideChangePasswd()"></app-change-password>
+</p-dialog>

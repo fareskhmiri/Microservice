@@ -1,0 +1,85 @@
+<app-screen
+  [showHeader]="showHeader"
+  [showFooter]="showFooter"
+  [loaderShow]="loading$|async"
+  class="container-fluid pl-screen pl-screen-view e2e-screen-view"
+>
+  <ng-template #headerTitle *ngIf="data$ | async">
+    <h1 i18n="@@UID__title;conge;view-1">Conge</h1>
+  </ng-template>
+  <ng-template #headerActions> </ng-template>
+  <ng-template #bodyScreen *ngIf="data$ | async">
+    <div class="card e2e-card content-form">
+      <div class="row">
+        <div
+          class="col-12 col-sm-12 col-md-6 col-lg-4 col-row-0 col-col-0 col-height-1 date-debut p-0 pr-xs-0 pr-sm-0 pr-md-4 pr-lg-4 mt-lg-0"
+        >
+          <div class="vp-label label-container e2e-label-container plm-left">
+            <div
+              class="label-title e2e-label-title"
+              i18n="@@UID__fld_dateDebut;conge;view-1"
+            >
+              Date Debut
+            </div>
+            <div class="label-value e2e-label-value label-field">
+              <span class="vp-label-text">{{ data?.dateDebut }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="col-12 col-sm-12 col-md-6 col-lg-4 col-row-0 col-col-4 col-height-1 date-fin p-0 pr-xs-0 pr-sm-0 pr-md-0 pr-lg-4 mt-lg-0"
+        >
+          <div class="vp-label label-container e2e-label-container plm-left">
+            <div
+              class="label-title e2e-label-title"
+              i18n="@@UID__fld_dateFin;conge;view-1"
+            >
+              Date Fin
+            </div>
+            <div class="label-value e2e-label-value label-field">
+              <span class="vp-label-text">{{ data?.dateFin }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="col-12 col-sm-12 col-md-6 col-lg-4 col-row-0 col-col-8 col-height-1 p-0 pr-xs-0 pr-sm-0 pr-md-4 pr-lg-0 mt-lg-0"
+        ></div>
+      </div>
+      <div class="row">
+        <div
+          class="col-12 col-sm-12 col-md-6 col-lg-4 col-row-1 col-col-0 col-height-1 statut p-0 pr-xs-0 pr-sm-0 pr-md-0 pr-lg-4"
+        >
+          <div class="vp-label label-container e2e-label-container plm-left">
+            <div
+              class="label-title e2e-label-title"
+              i18n="@@UID__fld_statut;conge;view-1"
+            >
+              Statut
+            </div>
+            <div class="label-value e2e-label-value label-field">
+              <span class="vp-label-text">{{ data?.statut }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="col-12 col-sm-12 col-md-6 col-lg-8 col-row-1 col-col-4 col-height-1 p-0 pr-xs-0 pr-sm-0 pr-md-4 pr-lg-0"
+        ></div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #bodyScreen *ngIf="!(loading$|async) && !(data$ | async)">
+    <div i18n="message;msgNoDataFound">No data to display</div>
+  </ng-template>
+</app-screen>
+<!-- to display screens with navigation type 'dialog'-->
+<router-outlet *ngIf="!disableNavigation" name="dialog"></router-outlet>
+
+<!-- to display screens with navigation type 'call'-->
+<router-outlet
+  *ngIf="!disableNavigation"
+  #callOutlet="outlet"
+  name="call"
+></router-outlet>

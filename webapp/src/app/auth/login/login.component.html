@@ -1,0 +1,70 @@
+<app-loader-mask [show]="loading$ | async"></app-loader-mask>
+<div class="plm-body">
+  <div class="container-fluid">
+    <div class="row plm-row">
+      <div class="plm-login col-12 col-sm-12 col-lg-9">
+        <div class="card">
+          <div>
+            <vp-logo></vp-logo>
+          </div>
+          <div
+            *ngIf="loginErrorMsg$ | async as loginErrorMsg"
+            class="plm-login-error-msg"
+          >
+            <span class="plm-error-msg">{{ loginErrorMsg }}</span>
+          </div>
+          <form
+            *ngIf="!resetPassword"
+            method="post"
+            autocomplete="off"
+            [formGroup]="form"
+          >
+            <div>
+              <i class="fas fa-user"></i>
+              <input
+                autofocus
+                autocomplete="off"
+                class="p-inputtext input-userlogo"
+                value=""
+                maxlength="100"
+                formControlName="username"
+                placeholder="Username"
+                i18n-placeholder="message;userName"
+              />
+            </div>
+            <div>
+              <i class="fas fa-lock"></i>
+              <input
+                autocomplete="off"
+                class="p-inputtext input-locklogo"
+                type="password"
+                value=""
+                maxlength="100"
+                formControlName="password"
+                placeholder="Password"
+                i18n-placeholder="message;password"
+              />
+            </div>
+            <div class="plm-actions">
+              <button
+                i18n="message;signIn"
+                type="submit"
+                name="sign-in"
+                (click)="onSubmit()"
+              >
+                Sign in
+              </button>
+            </div>
+          </form>
+          <div class="plm-copyright">
+            <p>VERMEG 2023 ©</p>
+          </div>
+          <app-change-password
+            *ngIf="resetPassword"
+            (passwordResetSuccess)="onResetSuccess($event)"
+          ></app-change-password>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

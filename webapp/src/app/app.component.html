@@ -1,0 +1,5 @@
+<app-loader-mask [show]="showLoading"></app-loader-mask>
+<ng-container *ngIf="loaded">
+  <vp-branding></vp-branding>
+  <router-outlet></router-outlet>
+</ng-container>

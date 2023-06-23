@@ -1,0 +1,86 @@
+<app-screen
+  [showHeader]="showHeader"
+  [showFooter]="showFooter"
+  [loaderShow]="loading$|async"
+  class="container-fluid pl-screen pl-screen-view e2e-screen-view"
+>
+  <ng-template #headerTitle *ngIf="data$ | async">
+    <h1 i18n="@@UID__title;message;view-message">Message</h1>
+  </ng-template>
+  <ng-template #headerActions> </ng-template>
+  <ng-template #bodyScreen *ngIf="data$ | async">
+    <div class="card e2e-card content-form">
+      <div class="row">
+        <div
+          class="col-12 col-sm-12 col-md-6 col-lg-12 col-row-0 col-col-0 col-height-1 message p-0 pr-xs-0 pr-sm-0 pr-md-4 pr-lg-0 mt-lg-0"
+        >
+          <div class="vp-label label-container e2e-label-container plm-left">
+            <div
+              class="label-title e2e-label-title"
+              i18n="@@UID__fld_message;message;view-message"
+            >
+              Message
+            </div>
+            <div class="label-value e2e-label-value label-field">
+              <span class="vp-label-text">{{ data?.message }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div
+          class="col-12 col-sm-12 col-md-6 col-lg-4 col-row-1 col-col-0 col-height-1 recipient p-0 pr-xs-0 pr-sm-0 pr-md-0 pr-lg-4"
+        >
+          <div class="vp-label label-container e2e-label-container plm-left">
+            <div
+              class="label-title e2e-label-title"
+              i18n="@@UID__fld_recipient;message;view-message"
+            >
+              Recipient
+            </div>
+            <div class="label-value e2e-label-value label-field">
+              <span class="vp-label-text">{{ data?.recipient }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="col-12 col-sm-12 col-md-6 col-lg-8 col-row-1 col-col-4 col-height-1 p-0 pr-xs-0 pr-sm-0 pr-md-4 pr-lg-0"
+        ></div>
+      </div>
+      <div class="row">
+        <div
+          class="col-12 col-sm-12 col-md-6 col-lg-4 col-row-2 col-col-0 col-height-1 sender p-0 pr-xs-0 pr-sm-0 pr-md-0 pr-lg-4"
+        >
+          <div class="vp-label label-container e2e-label-container plm-left">
+            <div
+              class="label-title e2e-label-title"
+              i18n="@@UID__fld_sender;message;view-message"
+            >
+              Sender
+            </div>
+            <div class="label-value e2e-label-value label-field">
+              <span class="vp-label-text">{{ data?.sender }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="col-12 col-sm-12 col-md-6 col-lg-8 col-row-2 col-col-4 col-height-1 p-0 pr-xs-0 pr-sm-0 pr-md-4 pr-lg-0"
+        ></div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #bodyScreen *ngIf="!(loading$|async) && !(data$ | async)">
+    <div i18n="message;msgNoDataFound">No data to display</div>
+  </ng-template>
+</app-screen>
+<!-- to display screens with navigation type 'dialog'-->
+<router-outlet *ngIf="!disableNavigation" name="dialog"></router-outlet>
+
+<!-- to display screens with navigation type 'call'-->
+<router-outlet
+  *ngIf="!disableNavigation"
+  #callOutlet="outlet"
+  name="call"
+></router-outlet>
