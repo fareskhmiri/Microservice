@@ -63,17 +63,12 @@ export class CongeAddCongeEffectsBase {
         code: payload.code,
       })
     }
-    if (payload.code === undefined) {
+    if (this.activeRoute.snapshot.queryParams.code === undefined) {
       return of({})
     } else {
       const params = {}
-      const code: any = getParamValue(
-        fromStore.getScreenActiveRoute(payload.id),
-        'code'
-      )
-      return this.httpClient.get<any>(`${BASE_PATH}api/conges/${code}`, {
-        params,
-      })
+      const code: any = this.activeRoute.snapshot.queryParams.code
+      return this.httpClient.get<any>(`${BASE_PATH}/conges/${code}`, { params })
     }
   }
   /**
@@ -137,7 +132,7 @@ export class CongeAddCongeEffectsBase {
    */
   executeButton35872039101(context): Observable<any> {
     const params = {}
-    return this.httpClient.put<any>(`${BASE_PATH}api/conges`, context.data, {
+    return this.httpClient.put<any>(`${BASE_PATH}/conges`, context.data, {
       params,
     })
   }
@@ -187,7 +182,7 @@ export class CongeAddCongeEffectsBase {
    */
   executeButton35872(context): Observable<any> {
     const params = {}
-    return this.httpClient.post<any>(`${BASE_PATH}api/conges`, context.data, {
+    return this.httpClient.post<any>(`${BASE_PATH}/conges`, context.data, {
       params,
     })
   }

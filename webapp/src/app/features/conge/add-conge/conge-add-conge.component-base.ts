@@ -194,6 +194,15 @@ export class CongeAddCongeBaseComponent
     })
   }
 
+  showButton35872039101(): boolean {
+    const dataId: any = get(this.data, `data.id`)
+    return dataId
+  }
+  showButton35872(): boolean {
+    const dataId: any = get(this.data, `data.id`)
+    return !dataId
+  }
+
   /**
    * Executes the Button35872039101 action
    * @return {void}

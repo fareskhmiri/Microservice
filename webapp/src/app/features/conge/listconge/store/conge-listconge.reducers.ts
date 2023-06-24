@@ -39,6 +39,19 @@ const _reducer = createReducer(
     adapter.removeOne(payload.id, state)
   ),
 
+  on(fromConge.button57632SuccessAction, (state, payload) => {
+    const changes = {
+      loading: false,
+    }
+    return adapter.updateOne(
+      {
+        id: payload.id,
+        changes: changes,
+      },
+      state
+    )
+  }),
+
   on(fromConge.maskAction, (state, payload) =>
     featureAdapter.enableLoading<any>(state, payload, adapter)
   ),

@@ -4,7 +4,7 @@
   class="container-fluid pl-screen e2e-screen-edit"
 >
   <ng-template #headerTitle *ngIf="data$ | async">
-    <h1 i18n="@@UID__title;conge;add-conge">Ajout Congé</h1>
+    <h1 i18n="@@UID__title;conge;add-conge">Ajouter Congé</h1>
   </ng-template>
   <ng-template #headerActions> </ng-template>
 
@@ -85,23 +85,27 @@
     <div i18n="message;msgNoDataFound">No data to display</div>
   </ng-template>
   <ng-template #footerActions>
-    <p-button
-      class="plm-button e2e-button style-save left"
-      i18n-label="@@UID__act_button-35872039101;conge;add-conge"
-      label="Update"
-      [disabled]="!this.isFormValid()"
-      (onClick)="doButton35872039101()"
-    >
-    </p-button>
+    <ng-container *ngIf="showButton35872039101()">
+      <p-button
+        class="plm-button e2e-button style-save left"
+        i18n-label="@@UID__act_button-35872039101;conge;add-conge"
+        label="Update"
+        [disabled]="!this.isFormValid()"
+        (onClick)="doButton35872039101()"
+      >
+      </p-button>
+    </ng-container>
 
-    <p-button
-      class="plm-button e2e-button style-save left"
-      i18n-label="@@UID__act_button-35872;conge;add-conge"
-      label="Save"
-      [disabled]="!this.isFormValid()"
-      (onClick)="doButton35872()"
-    >
-    </p-button>
+    <ng-container *ngIf="showButton35872()">
+      <p-button
+        class="plm-button e2e-button style-save left"
+        i18n-label="@@UID__act_button-35872;conge;add-conge"
+        label="Save"
+        [disabled]="!this.isFormValid()"
+        (onClick)="doButton35872()"
+      >
+      </p-button>
+    </ng-container>
   </ng-template>
 </app-screen>
 <!-- to display screens with navigation type 'dialog'-->

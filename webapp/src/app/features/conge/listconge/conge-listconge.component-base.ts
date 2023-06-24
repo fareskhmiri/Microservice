@@ -81,7 +81,7 @@ export class CongeListcongeBaseComponent
   /**
    * The technical keys of the configured columns
    */
-  keys = `dateDepart,dateFin`
+  keys = `dateDepart,dateFin,statut`
   /**
    * The Observable selector of the current page property stored in NGRX State
    */
@@ -127,6 +127,8 @@ export class CongeListcongeBaseComponent
     dateDepart: $localize`:@@UID__fld_dateDepart;conge;listconge:Date Depart`,
 
     dateFin: $localize`:@@UID__fld_dateFin;conge;listconge:Date Fin`,
+
+    statut: $localize`:@@UID__fld_statut;conge;listconge:Statut`,
 
     column34205: $localize`:@@UID__fld_column34205;conge;listconge:Column3`,
   }
@@ -303,6 +305,32 @@ export class CongeListcongeBaseComponent
     const payload = { ...this.getActionPayload(), data: rowData }
     this.store.dispatch(fromConge.button66719Action(payload))
   }
+
+  /***
+   * Executes the Button-57632 action
+   * @return {void}
+   **/
+  doButton57632(rowData): void {
+    this.confirmationService.confirm({
+      header: $localize`:message;confirmationMsg:Confirmation`,
+      message: $localize`:message;deleteItem:Are you sure?`,
+      accept: () => {
+        const payload = {
+          ...this.getActionPayload(),
+          rowId: rowData.code,
+          data: rowData,
+        }
+        this.store.dispatch(
+          fromConge.button57632Action({
+            ...payload,
+            targetCtx: { ...this.ctx },
+          })
+        )
+      },
+      key: 'congelistconge',
+    })
+  }
+
   /**
    * Executes the Button-26614 action
    * @return {void}

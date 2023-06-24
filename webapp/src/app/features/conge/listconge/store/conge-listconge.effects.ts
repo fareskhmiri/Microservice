@@ -28,6 +28,7 @@ import { ConditionEvaluatorService } from '@app/core/services/condition-evaluato
 
 import { EditAction } from '../actions/conge-edit-listconge.action'
 import { Button66719Action } from '../actions/conge-button-66719-listconge.action'
+import { Button57632Action } from '../actions/conge-button-57632-listconge.action'
 import { Button26614Action } from '../actions/conge-button-26614-listconge.action'
 import { environment } from '@env/environment'
 
@@ -53,6 +54,7 @@ export class CongeListcongeEffects {
     private activeRoute: ActivatedRoute,
     private editAction: EditAction,
     private button66719Action: Button66719Action,
+    private button57632Action: Button57632Action,
     private button26614Action: Button26614Action
   ) {}
 
@@ -87,7 +89,7 @@ export class CongeListcongeEffects {
       this.actions$.pipe(
         ofType(fromConge.searchAction, fromConge.refresh),
         switchMap((payload) => {
-          return of([]).pipe(
+          return  this.httpClient.get<any>(`${BASE_PATH}/conges`).pipe(
             switchMap((result) => {
               this.message.showHttpMessages(result)
               return [
@@ -139,7 +141,7 @@ export class CongeListcongeEffects {
       ofType(fromConge.button66719Action),
       map((context: any) => {
         context['path'] = '/conge/view-1'
-        context['navigationType'] = 'switch'
+        context['navigationType'] = 'dialog'
         context['feature'] = 'conge'
         context['screen'] = 'view-1'
         context['activeRoute'] = fromStore.getScreenActiveRoute(context.id)
@@ -147,8 +149,55 @@ export class CongeListcongeEffects {
           code: getValue(context.data, `id`, ''),
         }
         context['state'] = {}
-        return fromStore.navigateBySwitchAction(context)
+        return fromStore.navigateByDialogAction(context)
       })
+    )
+  )
+
+  /**
+   * Effect that runs the `button57632` action and dispatches a `success` or `echec` action
+   */
+  button57632Action$ = createEffect((): any =>
+    this.actions$.pipe(
+      ofType(fromConge.button57632Action),
+      switchMap((payload) => {
+        return this.actionHandler.perform(this.button57632Action, payload).pipe(
+          map((result) =>
+            fromConge.button57632SuccessAction({
+              ...payload,
+              data: mergeWith(payload.data, result),
+            })
+          ),
+          catchError((error) =>
+            of(fromConge.button57632FailAction({ ...payload }))
+          )
+        )
+      })
+    )
+  )
+
+  /**
+   * Effect that runs the `button57632` success action
+   */
+  button57632SuccessAction$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromConge.button57632SuccessAction),
+      switchMap((payload) => {
+        return [
+          fromConge.countAction({ ...payload, ...payload.vars }),
+          fromConge.searchAction({ ...payload, ...payload.vars }),
+        ]
+      })
+    )
+  )
+
+  button57632SuccesThenCount$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromConge.button57632SuccessAction),
+      switchMap((payload) => [
+        fromConge.countAction({ ...payload, ...payload.vars }),
+        fromConge.searchAction({ ...payload, ...payload.vars }),
+      ])
     )
   )
 

@@ -11,6 +11,28 @@ export const destroyAction = ngrxCreateAction(
 )
 
 /**
+ * The Button 78427 NGRX action
+ */
+export const button78427Action = ngrxCreateAction(
+  '[Conge view1] Button 78427',
+  (payload) => payload
+)
+/**
+ * The Button 78427 success NGRX action
+ */
+export const button78427SuccessAction = ngrxCreateAction(
+  '[Conge view1] Button 78427 Success',
+  (payload) => payload
+)
+/**
+ * The Button 78427 fail NGRX action
+ */
+export const button78427FailAction = ngrxCreateAction(
+  '[Conge view1] Button 78427 Fail',
+  (payload) => payload
+)
+
+/**
  * NGRX Action of the state initializer
  */
 export const initStateAction = ngrxCreateAction(

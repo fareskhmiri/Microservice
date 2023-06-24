@@ -25,6 +25,28 @@ export const button66719Action = ngrxCreateAction(
   (payload) => payload
 )
 /**
+ * The Button 57632 NGRX action
+ */
+export const button57632Action = ngrxCreateAction(
+  '[Conge listconge] Button 57632',
+  (payload) => payload
+)
+/**
+ * The Button 57632 success NGRX action
+ */
+export const button57632SuccessAction = ngrxCreateAction(
+  '[Conge listconge] Button 57632 Success',
+  (payload) => payload
+)
+/**
+ * The Button 57632 fail NGRX action
+ */
+export const button57632FailAction = ngrxCreateAction(
+  '[Conge listconge] Button 57632 Fail',
+  (payload) => payload
+)
+
+/**
  * The Button 26614 NGRX action
  */
 export const button26614Action = ngrxCreateAction(

@@ -97,4 +97,25 @@ export class CongeView1EffectsBase {
       ),
     { useEffectsErrorHandler: true }
   )
+
+  /**
+   * Navigates to a target screen
+   */
+  navigateAfterbutton78427$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromConge.button78427Action),
+      map((context: any) => {
+        return fromStore.navigateByBackAction(context)
+      })
+    )
+  )
+
+  /**
+   * This method displays messages
+   * @param params
+   * @returns {Observable}
+   */
+  postButton78427Execute(params): Observable<any> {
+    return of(params)
+  }
 }

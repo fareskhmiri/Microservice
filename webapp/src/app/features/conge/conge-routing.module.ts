@@ -29,6 +29,18 @@ const routes: Routes = [
     children: [
       {
         path: 'conge',
+        component: ScreenDialogComponent,
+        outlet: 'dialog',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('@features/conge/conge.module').then((m) => m.CongeModule),
+          },
+        ],
+      },
+      {
+        path: 'conge',
         outlet: 'call',
         loadChildren: () =>
           import('@features/conge/conge.module').then((m) => m.CongeModule),

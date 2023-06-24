@@ -73,13 +73,26 @@
                 >Date Fin</span
               >
             </th>
-            <th pResizableColumn hideColumn="Column34205" class="plm-left ui-l">
+            <th pResizableColumn hideColumn="statut" class="plm-left ui-l">
+              <span
+                i18n="@@UID__fld_statut;conge;listconge"
+                [pTooltip]="columnHeaderi18n?.statut"
+                [escape]="false"
+                tooltipPosition="top"
+                >Statut</span
+              >
+            </th>
+            <th
+              pResizableColumn
+              hideColumn="Column34205"
+              class="plm-left ui-xs"
+            >
               <span
                 i18n="@@UID__fld_column34205;conge;listconge"
                 [pTooltip]="columnHeaderi18n?.column34205"
                 [escape]="false"
                 tooltipPosition="top"
-                >Column3</span
+                ></span
               >
             </th>
           </tr>
@@ -96,7 +109,7 @@
               hideColumn="dateDepart"
             >
               <span class="ui-column-title e2e-ui-column-title"></span>
-              {{rowData?.dateDepart}}
+              {{rowData?.dateDebut| date:'dd MM yyyy'}}
             </td>
 
             <td
@@ -108,7 +121,19 @@
               hideColumn="dateFin"
             >
               <span class="ui-column-title e2e-ui-column-title"></span>
-              {{rowData?.dateFin}}
+              {{rowData?.dateFin | date:'dd MM yyyy'}}
+            </td>
+
+            <td
+              plmTruncatedCell
+              (mouseOverCell)="addTooltip($event)"
+              [tooltipDisabled]="disableTooltip"
+              [pTooltip]="rowData?.statut"
+              class="plm-left e2e-table ui-l"
+              hideColumn="statut"
+            >
+              <span class="ui-column-title e2e-ui-column-title"></span>
+              {{rowData?.statut}}
             </td>
             <td
               class="vp-col-column-34205 plm-left plm-container e2e-container"
@@ -119,7 +144,6 @@
                   i18n-label="@@UID__fld_edit;conge;listconge"
                   icon="fa fa-pen"
                   iconPos="left"
-                  label="Edit"
                   [disabled]=""
                   *ngIf="rowData && !rowData.isGrp "
                   (onClick)="doEdit(rowData)"
@@ -131,10 +155,20 @@
                   i18n-label="@@UID__fld_button66719;conge;listconge"
                   icon="pi pi-eye"
                   iconPos="left"
-                  label="View"
                   [disabled]=""
                   *ngIf="rowData && !rowData.isGrp "
                   (onClick)="doButton66719(rowData)"
+                >
+                </p-button>
+
+                <p-button
+                  class="plm-button e2e-inline-button"
+                  i18n-label="@@UID__fld_button57632;conge;listconge"
+                  icon="pi pi-trash"
+                  iconPos="left"
+                  [disabled]=""
+                  *ngIf="rowData && !rowData.isGrp "
+                  (onClick)="doButton57632(rowData)"
                 >
                 </p-button>
               </div>
@@ -144,7 +178,7 @@
 
         <ng-template pTemplate="emptymessage">
           <tr>
-            <td [attr.colspan]="4" class="text-align-ui-l e2e-text-align">
+            <td [attr.colspan]="5" class="text-align-ui-l e2e-text-align">
               <div
                 i18n="message;msgNoResultsFound"
                 *ngIf="!(loading$ | async) && (value$ | async)?.length === 0"

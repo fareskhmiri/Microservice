@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core'
 import { CongeListcongeActions } from './conge-listconge.actions'
 import { EditAction } from './conge-edit-listconge.action'
 import { Button66719Action } from './conge-button-66719-listconge.action'
+import { Button57632Action } from './conge-button-57632-listconge.action'
 import { Button26614Action } from './conge-button-26614-listconge.action'
 /**
  * @deprecated
@@ -13,6 +14,7 @@ import { Button26614Action } from './conge-button-26614-listconge.action'
   providers: [
     EditAction,
     Button66719Action,
+    Button57632Action,
     Button26614Action,
     CongeListcongeActions,
   ],

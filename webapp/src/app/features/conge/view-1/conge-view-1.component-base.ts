@@ -163,4 +163,14 @@ export class CongeView1BaseComponent extends ScreenComponent implements OnInit {
       ),
     }
   }
+
+  /**
+   * Executes the Button78427 action
+   * @return {void}
+   */
+  doButton78427(): void {
+    this.store.dispatch(
+      fromConge.button78427Action({ ...this.getActionPayload() })
+    )
+  }
 }

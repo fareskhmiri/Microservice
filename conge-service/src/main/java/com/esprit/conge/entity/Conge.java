@@ -15,6 +15,14 @@ public class Conge {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	private LocalDate dateDebut;
 	
     private LocalDate dateFin;
@@ -27,8 +35,9 @@ public class Conge {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Conge(LocalDate dateDebut, LocalDate dateFin, String statut) {
+	public Conge(Long id, LocalDate dateDebut, LocalDate dateFin, String statut) {
 		super();
+		this.id = id;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
 		this.statut = statut;

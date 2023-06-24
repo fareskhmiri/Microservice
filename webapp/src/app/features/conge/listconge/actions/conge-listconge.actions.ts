@@ -5,6 +5,7 @@ import { ActionHandler } from '@app/core/components/actions/action.handler'
 
 import { EditAction } from './conge-edit-listconge.action'
 import { Button66719Action } from './conge-button-66719-listconge.action'
+import { Button57632Action } from './conge-button-57632-listconge.action'
 import { Button26614Action } from './conge-button-26614-listconge.action'
 /**
  * @deprecated
@@ -18,6 +19,7 @@ export class CongeListcongeActions {
 
     private editAction: EditAction,
     private button66719Action: Button66719Action,
+    private button57632Action: Button57632Action,
     private button26614Action: Button26614Action
   ) {}
 
@@ -35,6 +37,14 @@ export class CongeListcongeActions {
    */
   button66719(context): Observable<any> {
     return this.actionHandler.perform(this.button66719Action, context)
+  }
+
+  /**
+   * Launches the lifecycle execution of the `Button-57632` action
+   * @returns {Observable}
+   */
+  button57632(context): Observable<any> {
+    return this.actionHandler.perform(this.button57632Action, context)
   }
 
   /**
