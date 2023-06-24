@@ -166,4 +166,21 @@ export class MessageViewMessageBaseComponent
       ),
     }
   }
+
+  /**
+   * Executes the cancel action
+   * @return {void}
+   */
+  doCancel(): void {
+    this.store.dispatch(
+      fromMessage.cancelAction({ ...this.getActionPayload() })
+    )
+  }
+  /**
+   * Executes the Edit action
+   * @return {void}
+   */
+  doEdit(): void {
+    this.store.dispatch(fromMessage.editAction({ ...this.getActionPayload() }))
+  }
 }

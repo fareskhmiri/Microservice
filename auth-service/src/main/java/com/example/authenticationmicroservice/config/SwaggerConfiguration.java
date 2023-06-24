@@ -34,7 +34,7 @@ public class SwaggerConfiguration {
                 "App to demonstrate Candidature MicroService based on Spring Boot",
                 "0.0.1-SNAPSHOT",
                 "Terms of Service",
-                new Contact("marwen ben mahmoud",
+                new Contact("Admin",
                         "",
                         ""),
                 "",

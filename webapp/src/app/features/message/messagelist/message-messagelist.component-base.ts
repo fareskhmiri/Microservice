@@ -130,7 +130,7 @@ export class MessageMessagelistBaseComponent
 
     recipient: $localize`:@@UID__fld_recipient;message;messagelist:Recipient`,
 
-    column87801: $localize`:@@UID__fld_column87801;message;messagelist:Column4`,
+    actions: $localize`:@@UID__fld_actions;message;messagelist:Actions`,
   }
 
   /** @inheritDoc */

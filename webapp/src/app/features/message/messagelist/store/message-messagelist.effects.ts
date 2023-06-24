@@ -125,9 +125,8 @@ export class MessageMessagelistEffects {
         context['feature'] = 'message'
         context['screen'] = 'Form-1'
         context['activeRoute'] = fromStore.getScreenActiveRoute(context.id)
-        context['queryParams'] = {
-          code: getValue(context.data, `id`, ''),
-        }
+        context['queryParams'] = {}
+        context['pathParams'] = [getValue(context.data, `_id`, '')]
         context['state'] = {}
         return fromStore.navigateBySwitchAction(context)
       })
@@ -146,9 +145,8 @@ export class MessageMessagelistEffects {
         context['feature'] = 'message'
         context['screen'] = 'view-message'
         context['activeRoute'] = fromStore.getScreenActiveRoute(context.id)
-        context['queryParams'] = {
-          code: getValue(context.data, `id`, ''),
-        }
+        context['queryParams'] = {}
+        context['pathParams'] = [getValue(context.data, `_id`, '')]
         context['state'] = {}
         return fromStore.navigateBySwitchAction(context)
       })

@@ -74,12 +74,12 @@ export class MessageViewMessageEffectsBase {
               )
           } else {
             const params = {}
-            const code: any = getParamValue(
+            const _id: any = getParamValue(
               fromStore.getScreenActiveRoute(payload.id),
-              'code'
+              'id'
             )
             return this.httpClient
-              .get<any>(`${BASE_PATH}/messages/${code}`, { params })
+              .get<any>(`${BASE_PATH}/messages/${_id}`, { params })
               .pipe(
                 map((result) => {
                   this.message.showHttpMessages(result)
@@ -96,5 +96,64 @@ export class MessageViewMessageEffectsBase {
         })
       ),
     { useEffectsErrorHandler: true }
+  )
+
+  /**
+   * Navigates to a target screen
+   */
+  navigateAftercancel$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromMessage.cancelAction),
+      map((context: any) => {
+        return fromStore.navigateByBackAction(context)
+      })
+    )
+  )
+
+  /**
+   * This method displays messages
+   * @param params
+   * @returns {Observable}
+   */
+  postCancelExecute(params): Observable<any> {
+    return of(params)
+  }
+
+  payloadEdit$ = this.actions$.pipe(
+    ofType(fromMessage.editAction),
+    map((payload) => payload)
+  )
+  edit$ = this.payloadEdit$.pipe(
+    switchMap((payload) => payload),
+    catchError((err: Error) => of(fromMessage.editFailAction({})))
+  )
+
+  editAction$ = createEffect(() =>
+    this.edit$.pipe(
+      withLatestFrom(this.payloadEdit$),
+      map(([result, payload]) =>
+        fromMessage.editSuccessAction({ ...payload, result })
+      )
+    )
+  )
+
+  /**
+   * Navigates to a target screen
+   */
+  navigateAfteredit$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromMessage.editSuccessAction),
+      map((context: any) => {
+        context['path'] = '/message/Form-1'
+        context['navigationType'] = 'switch'
+        context['feature'] = 'message'
+        context['screen'] = 'Form-1'
+        context['activeRoute'] = fromStore.getScreenActiveRoute(context.id)
+        context['queryParams'] = {}
+        context['pathParams'] = [getValue(context.data, `_id`, '')]
+        context['state'] = {}
+        return fromStore.navigateBySwitchAction(context)
+      })
+    )
   )
 }

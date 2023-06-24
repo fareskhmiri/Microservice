@@ -67,13 +67,11 @@ export class MessageForm1EffectsBase {
       return of({})
     } else {
       const params = {}
-      const code: any = getParamValue(
+      const _id: any = getParamValue(
         fromStore.getScreenActiveRoute(payload.id),
-        'code'
+        'id'
       )
-      return this.httpClient.get<any>(`${BASE_PATH}messages/${code}/edit`, {
-        params,
-      })
+      return this.httpClient.get<any>(`${BASE_PATH}/messages/${_id}`, { params })
     }
   }
   /**
@@ -106,6 +104,27 @@ export class MessageForm1EffectsBase {
     { useEffectsErrorHandler: true }
   )
 
+  /**
+   * Navigates to a target screen
+   */
+  navigateAftercancel$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromMessage.cancelAction),
+      map((context: any) => {
+        return fromStore.navigateByBackAction(context)
+      })
+    )
+  )
+
+  /**
+   * This method displays messages
+   * @param params
+   * @returns {Observable}
+   */
+  postCancelExecute(params): Observable<any> {
+    return of(params)
+  }
+
   send058028Action$ = createEffect((): any =>
     this.actions$.pipe(
       ofType(fromMessage.send058028Action),
@@ -137,8 +156,9 @@ export class MessageForm1EffectsBase {
    */
   executeSend058028(context): Observable<any> {
     const params = {}
+    const _id: any = getValue(context.data, `_id`, '')
     return this.httpClient.post<any>(
-      `${BASE_PATH}/messages/new`,
+      `${BASE_PATH}/messages/${_id}/edit`,
       context.data,
       { params }
     )
@@ -157,6 +177,26 @@ export class MessageForm1EffectsBase {
     this.message.showHttpMessages(params)
     return of(params)
   }
+
+  /**
+   * Navigates to a target screen
+   */
+  navigateAftersend058028$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromMessage.send058028SuccessAction),
+      map((context: any) => {
+        context['path'] = '/message/messagelist'
+        context['navigationType'] = 'switch'
+        context['feature'] = 'message'
+        context['screen'] = 'messagelist'
+        context['activeRoute'] = fromStore.getScreenActiveRoute(context.id)
+        context['queryParams'] = {}
+        context['pathParams'] = [context.data.code]
+        context['state'] = {}
+        return fromStore.navigateBySwitchAction(context)
+      })
+    )
+  )
 
   sendAction$ = createEffect((): any =>
     this.actions$.pipe(
@@ -209,4 +249,24 @@ export class MessageForm1EffectsBase {
     this.message.showHttpMessages(params)
     return of(params)
   }
+
+  /**
+   * Navigates to a target screen
+   */
+  navigateAftersend$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromMessage.sendSuccessAction),
+      map((context: any) => {
+        context['path'] = '/message/messagelist'
+        context['navigationType'] = 'switch'
+        context['feature'] = 'message'
+        context['screen'] = 'messagelist'
+        context['activeRoute'] = fromStore.getScreenActiveRoute(context.id)
+        context['queryParams'] = {}
+        context['pathParams'] = [context.data.code]
+        context['state'] = {}
+        return fromStore.navigateBySwitchAction(context)
+      })
+    )
+  )
 }

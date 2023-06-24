@@ -81,7 +81,7 @@ export class MessageForm1BaseComponent
   /**
    * The technical keys of the input fields
    */
-  keys = `message,sender,recepient`
+  keys = `message,sender,recipient`
 
   /**
    * Default Constructor of the component:
@@ -189,8 +189,27 @@ export class MessageForm1BaseComponent
     return this.featureService.formBuilder.group({
       message: [null, [Validators.required]],
       sender: [null, [Validators.required]],
-      recepient: [null, [Validators.required]],
+      recipient: [null, [Validators.required]],
     })
+  }
+
+  showSend058028(): boolean {
+    const id: any = get(this.data, `_id`)
+    return id
+  }
+  showSend(): boolean {
+    const id: any = get(this.data, `_id`)
+    return !id
+  }
+
+  /**
+   * Executes the cancel action
+   * @return {void}
+   */
+  doCancel(): void {
+    this.store.dispatch(
+      fromMessage.cancelAction({ ...this.getActionPayload() })
+    )
   }
 
   /**

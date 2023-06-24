@@ -72,30 +72,30 @@
         </div>
         <div class="row">
           <div
-            class="col-12 col-sm-12 col-md-6 col-lg-6 col-row-2 col-col-0 col-height-1 recepient p-0 pr-xs-0 pr-sm-0 pr-md-4 pr-lg-4"
+            class="col-12 col-sm-12 col-md-6 col-lg-6 col-row-2 col-col-0 col-height-1 recipient p-0 pr-xs-0 pr-sm-0 pr-md-4 pr-lg-4"
           >
             <div
-              [ngClass]="{'input-field vp-inputtext': true, 'filled': data?.recepient}"
+              [ngClass]="{'input-field vp-inputtext': true, 'filled': data?.recipient}"
             >
               <div class="vp-inputtext-wraper">
                 <input
                   class="e2e-text-field input"
                   type="text"
                   pInputText
-                  id="recepient"
+                  id="recipient"
                   [readonly]=""
-                  formControlName="recepient"
+                  formControlName="recipient"
                   [required]="true"
                 />
                 <label
-                  i18n="@@UID__fld_recepient;message;form-1"
-                  for="recepient"
+                  i18n="@@UID__fld_recipient;message;form-1"
+                  for="recipient"
                 >
-                  Recepient
+                  recipient
                 </label>
               </div>
 
-              <app-validator [control]="form?.get('recepient')"></app-validator>
+              <app-validator [control]="form?.get('recipient')"></app-validator>
             </div>
           </div>
 
@@ -111,22 +111,34 @@
   </ng-template>
   <ng-template #footerActions>
     <p-button
-      class="plm-button e2e-button style-save left"
-      i18n-label="@@UID__act_send-058028;message;form-1"
-      label="Update"
-      [disabled]="!this.isFormValid()"
-      (onClick)="doSend058028()"
+      class="plm-button e2e-button style-cancel left"
+      i18n-label="@@UID__act_cancel;message;form-1"
+      label="Cancel"
+      (onClick)="doCancel()"
     >
     </p-button>
 
-    <p-button
-      class="plm-button e2e-button style-save left"
-      i18n-label="@@UID__act_send;message;form-1"
-      label="Send"
-      [disabled]="!this.isFormValid()"
-      (onClick)="doSend()"
-    >
-    </p-button>
+    <ng-container *ngIf="showSend058028()">
+      <p-button
+        class="plm-button e2e-button style-save left"
+        i18n-label="@@UID__act_send-058028;message;form-1"
+        label="Update"
+        [disabled]="!this.isFormValid()"
+        (onClick)="doSend058028()"
+      >
+      </p-button>
+    </ng-container>
+
+    <ng-container *ngIf="showSend()">
+      <p-button
+        class="plm-button e2e-button style-save left"
+        i18n-label="@@UID__act_send;message;form-1"
+        label="Send"
+        [disabled]="!this.isFormValid()"
+        (onClick)="doSend()"
+      >
+      </p-button>
+    </ng-container>
   </ng-template>
 </app-screen>
 <!-- to display screens with navigation type 'dialog'-->

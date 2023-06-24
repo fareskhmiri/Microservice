@@ -11,6 +11,27 @@ export const destroyAction = ngrxCreateAction(
 )
 
 /**
+ * The Cancel NGRX action
+ */
+export const cancelAction = ngrxCreateAction(
+  '[Message form1] Cancel',
+  (payload) => payload
+)
+/**
+ * The Cancel success NGRX action
+ */
+export const cancelSuccessAction = ngrxCreateAction(
+  '[Message form1] Cancel Success',
+  (payload) => payload
+)
+/**
+ * The Cancel fail NGRX action
+ */
+export const cancelFailAction = ngrxCreateAction(
+  '[Message form1] Cancel Fail',
+  (payload) => payload
+)
+/**
  * The Send 058028 NGRX action
  */
 export const send058028Action = ngrxCreateAction(

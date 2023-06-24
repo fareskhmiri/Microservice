@@ -74,6 +74,23 @@
   <ng-template #bodyScreen *ngIf="!(loading$|async) && !(data$ | async)">
     <div i18n="message;msgNoDataFound">No data to display</div>
   </ng-template>
+  <ng-template #footerActions>
+    <p-button
+      class="plm-button e2e-button style-cancel left"
+      i18n-label="@@UID__act_cancel;message;view-message"
+      label="Cancel"
+      (onClick)="doCancel()"
+    >
+    </p-button>
+
+    <p-button
+      class="plm-button e2e-button style-edit left"
+      i18n-label="@@UID__act_edit;message;view-message"
+      label="Edit"
+      (onClick)="doEdit()"
+    >
+    </p-button>
+  </ng-template>
 </app-screen>
 <!-- to display screens with navigation type 'dialog'-->
 <router-outlet *ngIf="!disableNavigation" name="dialog"></router-outlet>

@@ -11,6 +11,49 @@ export const destroyAction = ngrxCreateAction(
 )
 
 /**
+ * The Cancel NGRX action
+ */
+export const cancelAction = ngrxCreateAction(
+  '[Message viewMessage] Cancel',
+  (payload) => payload
+)
+/**
+ * The Cancel success NGRX action
+ */
+export const cancelSuccessAction = ngrxCreateAction(
+  '[Message viewMessage] Cancel Success',
+  (payload) => payload
+)
+/**
+ * The Cancel fail NGRX action
+ */
+export const cancelFailAction = ngrxCreateAction(
+  '[Message viewMessage] Cancel Fail',
+  (payload) => payload
+)
+/**
+ * The Edit NGRX action
+ */
+export const editAction = ngrxCreateAction(
+  '[Message viewMessage] Edit',
+  (payload) => payload
+)
+/**
+ * The Edit success NGRX action
+ */
+export const editSuccessAction = ngrxCreateAction(
+  '[Message viewMessage] Edit Success',
+  (payload) => payload
+)
+/**
+ * The Edit fail NGRX action
+ */
+export const editFailAction = ngrxCreateAction(
+  '[Message viewMessage] Edit Fail',
+  (payload) => payload
+)
+
+/**
  * NGRX Action of the state initializer
  */
 export const initStateAction = ngrxCreateAction(
