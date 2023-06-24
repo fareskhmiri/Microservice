@@ -25,6 +25,28 @@ export const button01644Action = ngrxCreateAction(
   (payload) => payload
 )
 /**
+ * The Delete NGRX action
+ */
+export const deleteAction = ngrxCreateAction(
+  '[Message messagelist] Delete',
+  (payload) => payload
+)
+/**
+ * The Delete success NGRX action
+ */
+export const deleteSuccessAction = ngrxCreateAction(
+  '[Message messagelist] Delete Success',
+  (payload) => payload
+)
+/**
+ * The Delete fail NGRX action
+ */
+export const deleteFailAction = ngrxCreateAction(
+  '[Message messagelist] Delete Fail',
+  (payload) => payload
+)
+
+/**
  * The Button 03772 NGRX action
  */
 export const button03772Action = ngrxCreateAction(

@@ -28,6 +28,7 @@ import { ConditionEvaluatorService } from '@app/core/services/condition-evaluato
 
 import { Button91271Action } from '../actions/message-button-91271-messagelist.action'
 import { Button01644Action } from '../actions/message-button-01644-messagelist.action'
+import { DeleteAction } from '../actions/message-delete-messagelist.action'
 import { Button03772Action } from '../actions/message-button-03772-messagelist.action'
 import { environment } from '@env/environment'
 
@@ -53,6 +54,7 @@ export class MessageMessagelistEffects {
     private activeRoute: ActivatedRoute,
     private button91271Action: Button91271Action,
     private button01644Action: Button01644Action,
+    private deleteAction: DeleteAction,
     private button03772Action: Button03772Action
   ) {}
 
@@ -150,6 +152,71 @@ export class MessageMessagelistEffects {
         context['state'] = {}
         return fromStore.navigateBySwitchAction(context)
       })
+    )
+  )
+
+  /**
+   * Effect that runs the `delete` action and dispatches a `success` or `echec` action
+   */
+  deleteAction$ = createEffect((): any =>
+    this.actions$.pipe(
+      ofType(fromMessage.deleteAction),
+      switchMap((payload) => {
+        return this.actionHandler.perform(this.deleteAction, payload).pipe(
+          map((result) =>
+            fromMessage.deleteSuccessAction({
+              ...payload,
+              data: mergeWith(payload.data, result),
+            })
+          ),
+          catchError((error) =>
+            of(fromMessage.deleteFailAction({ ...payload }))
+          )
+        )
+      })
+    )
+  )
+  /**
+   * Navigates to a target screen
+   */
+  navigateAfterdelete$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromMessage.deleteSuccessAction),
+      map((context: any) => {
+        context['path'] = '/message/messagelist'
+        context['navigationType'] = 'switch'
+        context['feature'] = 'message'
+        context['screen'] = 'messagelist'
+        context['activeRoute'] = fromStore.getScreenActiveRoute(context.id)
+        context['queryParams'] = {}
+        context['state'] = {}
+        return fromStore.navigateBySwitchAction(context)
+      })
+    )
+  )
+
+  /**
+   * Effect that runs the `delete` success action
+   */
+  deleteSuccessAction$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromMessage.deleteSuccessAction),
+      switchMap((payload) => {
+        return [
+          fromMessage.countAction({ ...payload, ...payload.vars }),
+          fromMessage.searchAction({ ...payload, ...payload.vars }),
+        ]
+      })
+    )
+  )
+
+  deleteSuccesThenCount$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromMessage.deleteSuccessAction),
+      switchMap((payload) => [
+        fromMessage.countAction({ ...payload, ...payload.vars }),
+        fromMessage.searchAction({ ...payload, ...payload.vars }),
+      ])
     )
   )
 

@@ -156,6 +156,18 @@
                   (onClick)="doButton01644(rowData)"
                 >
                 </p-button>
+
+                <p-button
+                  class="plm-button e2e-inline-button"
+                  i18n-label="@@UID__fld_delete;message;messagelist"
+                  icon="fa fa-trash-alt"
+                  iconPos="left"
+                  label="Delete"
+                  [disabled]=""
+                  *ngIf="rowData && !rowData.isGrp "
+                  (onClick)="doDelete(rowData)"
+                >
+                </p-button>
               </div>
             </td>
           </tr>

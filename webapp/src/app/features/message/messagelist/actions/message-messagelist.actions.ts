@@ -5,6 +5,7 @@ import { ActionHandler } from '@app/core/components/actions/action.handler'
 
 import { Button91271Action } from './message-button-91271-messagelist.action'
 import { Button01644Action } from './message-button-01644-messagelist.action'
+import { DeleteAction } from './message-delete-messagelist.action'
 import { Button03772Action } from './message-button-03772-messagelist.action'
 /**
  * @deprecated
@@ -18,6 +19,7 @@ export class MessageMessagelistActions {
 
     private button91271Action: Button91271Action,
     private button01644Action: Button01644Action,
+    private deleteAction: DeleteAction,
     private button03772Action: Button03772Action
   ) {}
 
@@ -35,6 +37,14 @@ export class MessageMessagelistActions {
    */
   button01644(context): Observable<any> {
     return this.actionHandler.perform(this.button01644Action, context)
+  }
+
+  /**
+   * Launches the lifecycle execution of the `delete` action
+   * @returns {Observable}
+   */
+  delete(context): Observable<any> {
+    return this.actionHandler.perform(this.deleteAction, context)
   }
 
   /**

@@ -41,6 +41,19 @@ const _reducer = createReducer(
     adapter.removeOne(payload.id, state)
   ),
 
+  on(fromMessage.deleteSuccessAction, (state, payload) => {
+    const changes = {
+      loading: false,
+    }
+    return adapter.updateOne(
+      {
+        id: payload.id,
+        changes: changes,
+      },
+      state
+    )
+  }),
+
   on(fromMessage.maskAction, (state, payload) =>
     featureAdapter.enableLoading<any>(state, payload, adapter)
   ),

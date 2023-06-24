@@ -53,10 +53,8 @@ router.post("/:id/edit", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    let messages = await Messages.findOne({ id: req.params.id });
-    Messages.deleteOne(article, function () {
-      res.status(200);
-    });
+    let messages = await Messages.findOneAndDelete({ id: req.params.id });
+    res.status(200).json(messages);
   } catch (error) {
     res.status(500);
     console.log(error);

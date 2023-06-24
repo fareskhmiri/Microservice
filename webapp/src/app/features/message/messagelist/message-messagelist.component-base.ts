@@ -305,6 +305,29 @@ export class MessageMessagelistBaseComponent
     const payload = { ...this.getActionPayload(), data: rowData }
     this.store.dispatch(fromMessage.button01644Action(payload))
   }
+
+  /***
+   * Executes the delete action
+   * @return {void}
+   **/
+  doDelete(rowData): void {
+    this.confirmationService.confirm({
+      header: $localize`:message;confirmationMsg:Confirmation`,
+      message: $localize`:message;deleteItem:Are you sure?`,
+      accept: () => {
+        const payload = {
+          ...this.getActionPayload(),
+          rowId: rowData.code,
+          data: rowData,
+        }
+        this.store.dispatch(
+          fromMessage.deleteAction({ ...payload, targetCtx: { ...this.ctx } })
+        )
+      },
+      key: 'messagemessagelist',
+    })
+  }
+
   /**
    * Executes the Button-03772 action
    * @return {void}

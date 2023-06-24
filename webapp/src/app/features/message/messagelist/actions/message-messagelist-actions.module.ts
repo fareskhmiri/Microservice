@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core'
 import { MessageMessagelistActions } from './message-messagelist.actions'
 import { Button91271Action } from './message-button-91271-messagelist.action'
 import { Button01644Action } from './message-button-01644-messagelist.action'
+import { DeleteAction } from './message-delete-messagelist.action'
 import { Button03772Action } from './message-button-03772-messagelist.action'
 /**
  * @deprecated
@@ -13,6 +14,7 @@ import { Button03772Action } from './message-button-03772-messagelist.action'
   providers: [
     Button91271Action,
     Button01644Action,
+    DeleteAction,
     Button03772Action,
     MessageMessagelistActions,
   ],
