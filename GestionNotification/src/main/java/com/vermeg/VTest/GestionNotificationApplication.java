@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.stream.Stream;
 
 @EnableEurekaClient
@@ -22,8 +24,8 @@ public class GestionNotificationApplication {
     ApplicationRunner start(INotificationRepository repo) {
         return args ->
         {
-            Stream.of(new Notification("Mustapha", "TRABELSI", "mtrabelsi@gmail.com"),
-                    new Notification("Azza", "TAJOURI", "atajouri@gmail.com")).forEach(
+            Stream.of(new Notification("employe ajoute", "lu" ,"mtrabelsi@gmail.com", LocalDate.now()),
+                    new Notification("employe retire", "non lu", "atajouri@gmail.com", LocalDate.now())).forEach(
                     Notification -> {
                         repo.save(Notification);
                     });
