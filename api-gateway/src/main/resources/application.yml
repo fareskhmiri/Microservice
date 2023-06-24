@@ -32,7 +32,7 @@ spring:
         - id : auth-service
           uri: lb://auth-service
           predicates:
-            - Path=/v1/**
+            - Path=/api/v1/**
         - id: evaluation-service
           uri: lb://evaluation-service
           predicates:

@@ -37,18 +37,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         CustomAuthFilter customAuthFilter =  new  CustomAuthFilter(authenticationManagerBean());
         
-        customAuthFilter.setFilterProcessesUrl("/v1/login");
+        customAuthFilter.setFilterProcessesUrl("/api/v1/login");
 
         http.authorizeRequests().antMatchers("/swagger-ui.html/**").permitAll();
-        http.authorizeRequests().antMatchers("/v1/login/**").permitAll();
+        http.authorizeRequests().antMatchers("/api/v1/login/**").permitAll();
         http.authorizeRequests().antMatchers("/swagger-resources/**").permitAll();
         http.authorizeRequests().antMatchers("/v2/api-docs/**").permitAll();
         http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
         http.authorizeRequests().antMatchers("/webjars/**").permitAll();
 
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/v1/api/user/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/v1/api/user/add-role/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/v1/api/user/save/**").hasAnyAuthority("ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/v1/user/**").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/v1/user/add-role/**").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/v1/user/save/**").hasAnyAuthority("ADMIN");
 
 
         http.authorizeRequests().anyRequest().authenticated();
