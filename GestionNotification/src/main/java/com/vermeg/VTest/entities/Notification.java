@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -13,14 +14,15 @@ public class Notification implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long idClient;
-    private String nom;
-    private String prenom;
-    @Temporal(TemporalType.DATE)
-    private Date dateNaissance;
+    private Long idNotification;
+    private String description;
+    private String satus;
+//    @Temporal(TemporalType.DATE)
+//    private Date dateF;
     private String email;
-    private String password;
-    private int jobID;
+//    private String password;
+    private LocalDate date;
+//    private int jobID;
 
 
     public Notification() {
@@ -29,10 +31,11 @@ public class Notification implements Serializable {
     }
 
 
-    public Notification(String nom, String prenom, String email) {
+    public Notification(String description, String satus, String email, LocalDate date) {
         super();
-        this.nom = nom;
-        this.prenom = prenom;
+        this.description = description;
+        this.satus = satus;
         this.email = email;
+        this.date = date;
     }
 }
