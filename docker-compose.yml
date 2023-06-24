@@ -48,17 +48,17 @@ services:
   #   depends_on:
   #     - Eureka
 
-  # Offre:
-  #   container_name: offre-service
-  #   build: ./offre-service
-  #   ports:
-  #     - "8086:8086"
-  #   hostname: offre
-  #   environment:
-  #     - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-  #   image: "offre-service"
-  #   depends_on:
-  #     - Eureka
+  Notification:
+    container_name: Notification-service
+    build: ./GestionNotification
+    ports:
+      - "8086:8086"
+    hostname: offre
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    image: "notification-service"
+    depends_on:
+      - Eureka
 
   Auth:
     container_name: auth-service
