@@ -1,0 +1,57 @@
+version: "3.9"
+
+services:
+  eurekaserver:
+    build: /Users/badrbenfraj/IdeaProjects/eureka
+    container_name: eurekaserver
+    image: eurekaserver
+    networks:
+      - eureka-server
+    ports:
+      - "8761:8761"
+
+  gestionNotification:
+    build: /Users/badrbenfraj/IdeaProjects/GestionNotification
+    #  network_mode: host
+    container_name: gestionNotification
+    image: gestionNotification
+    ports:
+      - "8081:8081"
+    networks:
+      - eureka-server
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://eurekaserver:8761/eureka
+    depends_on:
+      - eurekaserver
+
+  users:
+    build: /Users/badrbenfraj/IdeaProjects/UserService
+    #  network_mode: host
+    container_name: users
+    image: users
+    ports:
+      - "3000:3000"
+    networks:
+      - eureka-server
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=eurekaserver
+    depends_on:
+      - gestionNotification
+
+  gateway:
+    build: /Users/badrbenfraj/IdeaProjects/gateway
+    container_name: gateway
+    image: gateway
+    ports:
+      - "8762:8762"
+    networks:
+      - eureka-server
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://eurekaserver:8761/eureka
+    depends_on:
+      - users
+
+networks:
+  eureka-server:
+    name: eureka-server
+    driver: bridge
