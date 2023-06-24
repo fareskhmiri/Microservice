@@ -1,16 +1,16 @@
-version: "3.9"
+version: "3.0"
 services:
-  # Candidate:
-  #   container_name: candidat-service
-  #   build: ./candidat-service
-  #   ports:
-  #     - "8045:8045"
-  #   hostname: candidate
-  #   environment:
-  #     - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-  #   image: "candidate-service"
-  #   depends_on:
-  #     - Eureka
+  Conge:
+    container_name: conge-service
+    build: ./conge-service
+    ports:
+      - "8085:8085"
+    hostname: conge
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    image: "conge-service"
+    depends_on:
+      - Eureka
 
   Participation:
     container_name: participation_service
