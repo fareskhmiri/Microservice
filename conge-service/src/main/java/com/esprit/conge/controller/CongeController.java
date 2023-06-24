@@ -1,6 +1,7 @@
 package com.esprit.conge.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.esprit.conge.entity.Conge;
@@ -36,6 +37,15 @@ public class CongeController {
     @PutMapping("/{id}")
     public Conge modifierConge(@PathVariable Long id, @RequestBody Conge conge) {
         return congeService.modifierConge(id, conge);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Conge> getCongeById(@PathVariable Long id) {
+        Conge conge = congeService.getCongeById(id);
+        if (conge != null) {
+            return ResponseEntity.ok(conge);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
 

@@ -94,7 +94,7 @@ export class AuthManagerService {
     }).toString()
 
     this.http
-      .post(`${BASE_PATH}/security/authenticate`, body, {
+      .post(`${BASE_PATH}/v1/login`, body, {
         headers,
       })
       .subscribe(
@@ -193,14 +193,7 @@ export class AuthManagerService {
       },
     }).toString()
 
-    this.http
-      .post(`${BASE_PATH}/security/logout`, body, {
-        headers,
-      })
-      .subscribe(
-        (value) => this.doLogout(),
-        (error) => this.doLogout()
-      )
+    this.doLogout()
   }
   /**
    * Logout the user

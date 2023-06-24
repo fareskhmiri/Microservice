@@ -36,7 +36,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         CustomAuthFilter customAuthFilter =  new  CustomAuthFilter(authenticationManagerBean());
+        
         customAuthFilter.setFilterProcessesUrl("/v1/login");
+
         http.authorizeRequests().antMatchers("/swagger-ui.html/**").permitAll();
         http.authorizeRequests().antMatchers("/v1/login/**").permitAll();
         http.authorizeRequests().antMatchers("/swagger-resources/**").permitAll();

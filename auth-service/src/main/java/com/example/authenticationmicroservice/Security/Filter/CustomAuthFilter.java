@@ -18,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,14 +36,37 @@ public class CustomAuthFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 
-        String username = request.getParameter("username") ;
-        String password = request.getParameter("password") ;
+    	String username = getUsernameFromHeader(request);
+        String password = getPasswordFromHeader(request);
         log.info("username is {} and password is {}" , username , password);
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username , password) ;
 
         return authenticationManager.authenticate(authenticationToken) ;
     }
-
+    private String getUsernameFromHeader(HttpServletRequest request) {
+        String authorizationHeader = request.getHeader("Authorization");
+        if (authorizationHeader != null && authorizationHeader.startsWith("Basic ")) {
+            String base64Credentials = authorizationHeader.substring("Basic ".length());
+            String credentials = new String(Base64.getDecoder().decode(base64Credentials));
+            String[] usernamePassword = credentials.split(":", 2);
+            if (usernamePassword.length == 2) {
+                return usernamePassword[0];
+            }
+        }
+        return null;
+    }
+    private String getPasswordFromHeader(HttpServletRequest request) {
+        String authorizationHeader = request.getHeader("Authorization");
+        if (authorizationHeader != null && authorizationHeader.startsWith("Basic ")) {
+            String base64Credentials = authorizationHeader.substring("Basic ".length());
+            String credentials = new String(Base64.getDecoder().decode(base64Credentials));
+            String[] usernamePassword = credentials.split(":", 2);
+            if (usernamePassword.length == 2) {
+                return usernamePassword[1];
+            }
+        }
+        return null;
+    }
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         User  user = (User) authResult.getPrincipal();

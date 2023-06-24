@@ -22,7 +22,9 @@ public class CongeService {
     public Conge ajouterConge(Conge conge) {
         return congeRepository.save(conge);
     }
-
+    public Conge getCongeById(Long id) {
+        return congeRepository.findById(id).orElse(null);
+    }
     public List<Conge> afficherConges() {
         return congeRepository.findAll();
     }
