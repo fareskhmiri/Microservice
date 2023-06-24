@@ -24,8 +24,8 @@ public class GestionNotificationApplication {
     ApplicationRunner start(INotificationRepository repo) {
         return args ->
         {
-            Stream.of(new Notification("aaaaaaaaaaa", "lu" ,"mtrabelsi@gmail.com", LocalDate.now()),
-                    new Notification("bbbbbbbbbb", "non lu", "atajouri@gmail.com", LocalDate.now())).forEach(
+            Stream.of(new Notification("employe ajoute", "lu" ,"mtrabelsi@gmail.com", LocalDate.now()),
+                    new Notification("employe retire", "non lu", "atajouri@gmail.com", LocalDate.now())).forEach(
                     Notification -> {
                         repo.save(Notification);
                     });
